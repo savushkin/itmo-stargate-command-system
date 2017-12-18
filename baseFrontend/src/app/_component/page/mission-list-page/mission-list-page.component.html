@@ -1,0 +1,37 @@
+<div class="page-container" [style.min-height.px]="minHeight">
+  <mat-card>
+    <mat-card-title>Список миссий</mat-card-title>
+    <mat-card-content>
+      <div *ngFor="let planet of addresses">
+        <h3>{{planet.title}}</h3>
+        <mat-form-field>
+          <mat-select placeholder="Отряд" [(ngModel)]="planet.squad">
+            <mat-option [value]="0">
+              SG-1
+            </mat-option>
+            <mat-option [value]="1">
+              SG-2
+            </mat-option>
+            <mat-option [value]="2">
+              SG-3
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <sgc-glyph
+            *ngFor="let glyph of planet.glyphs"
+            [id]="glyph">
+          </sgc-glyph>
+        </div>
+        <div>
+          <button mat-raised-button color="primary">
+            Утвердить
+          </button>
+          <button mat-raised-button color="warn">
+            Отменить
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

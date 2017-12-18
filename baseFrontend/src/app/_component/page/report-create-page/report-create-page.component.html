@@ -1,0 +1,33 @@
+<div class="page-container" [style.min-height.px]="minHeight">
+  <mat-card>
+    <mat-card-title>Новый отчёт</mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Дата">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Зона">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Команда">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput matTextareaAutosize type="text" placeholder="Состояние команды"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput matTextareaAutosize type="text" placeholder="Проблемы в оборудовании"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput matTextareaAutosize type="text" placeholder="Медикаменты"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput matTextareaAutosize type="text" placeholder="Оборудование"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">
+        Сохранить
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

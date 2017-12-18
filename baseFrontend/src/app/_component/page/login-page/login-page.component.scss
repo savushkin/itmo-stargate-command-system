@@ -1,0 +1,10 @@
+.login-card {
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__field {
+    width: 100%;
+  }
+}

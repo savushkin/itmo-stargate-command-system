@@ -1,0 +1,21 @@
+<div class="page-container small" [style.min-height.px]="minHeight">
+  <form name="login-form" (ngSubmit)="login()" #loginForm="ngForm" *ngIf="!user">
+    <mat-card class="login-card">
+      <mat-card-title>
+        Авторизация
+      </mat-card-title>
+      <mat-card-content class="login-card__content">
+        <mat-form-field class="login-card__field">
+          <input matInput placeholder="Логин" type="text" name="username" required [(ngModel)]="username">
+          <!--<mat-error *ngIf="true"></mat-error>-->
+        </mat-form-field>
+        <mat-form-field class="login-card__field">
+          <input matInput placeholder="Пароль" type="password" name="password" required [(ngModel)]="password">
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button type="submit" color="primary">Войти</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
