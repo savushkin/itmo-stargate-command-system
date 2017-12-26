@@ -1,0 +1,49 @@
+<form (submit)="createMission()">
+  <mat-form-field>
+    <textarea [(ngModel)]="description" name="description" required matInput mat-autosize maxlength="4096" type="text" placeholder="Описание миссии"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="date" name="date" required [matDatepicker]="datePicker" [min]="now" placeholder="Выберите дату отправления">
+    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+    <mat-datepicker #datePicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Выберите зону" [formControl]="zoneCtrl" required
+           [matAutocomplete]="searchZone">
+    <button matSuffix mat-icon-button>
+      <mat-icon>
+        search
+      </mat-icon>
+    </button>
+    <mat-hint>
+      Начните ввод названия зоны
+    </mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Выберите отряд" [formControl]="commandCtrl" required
+           [matAutocomplete]="searchCommand">
+    <button matSuffix mat-icon-button>
+      <mat-icon>
+        search
+      </mat-icon>
+    </button>
+    <mat-hint>
+      Начните ввод названия типа отряда
+    </mat-hint>
+  </mat-form-field>
+  <mat-autocomplete #searchZone="matAutocomplete">
+    <mat-option *ngFor="let zone of filteredZone | async"
+                [value]="zone.id">
+      {{ zone.name }} - {{ zone.description }}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-autocomplete #searchCommand="matAutocomplete">
+    <mat-option *ngFor="let command of filteredCommand | async"
+                [value]="command.id">
+      {{ command.commandType.typeName }} - {{command.id}}
+    </mat-option>
+  </mat-autocomplete>
+  <button mat-raised-button type="submit" color="primary">
+    Создать
+  </button>
+</form>

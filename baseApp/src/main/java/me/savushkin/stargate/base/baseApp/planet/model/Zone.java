@@ -19,7 +19,7 @@ public class Zone {
     @Column(name = "name", unique = true, nullable = false, length = 255)
     private String name;
 
-    @Column(name = "description", unique = true, nullable = false, length = 4096)
+    @Column(name = "description", length = 4096)
     private String description;
 
     @Column(name = "glyph_1")

@@ -14,7 +14,11 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatProgressBarModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatAutocompleteModule,
+  MAT_DATE_LOCALE
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 
@@ -36,7 +40,10 @@ import {NgModule} from '@angular/core';
     MatTableModule,
     MatPaginatorModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatButtonModule,
@@ -55,7 +62,16 @@ import {NgModule} from '@angular/core';
     MatTableModule,
     MatPaginatorModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
+  providers: [
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'ru-RU'
+    }
+  ]
 })
 export class AppMaterialModule { }

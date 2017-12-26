@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import {User} from "../../_model/user";
-import {Page} from "../../_model/page";
+import {Injectable} from '@angular/core';
+import {User} from "@sgc/_model/user";
+import {Page} from "@sgc/_model/page";
 import {Observable} from "rxjs/Observable";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
+import {environment} from "@env/environment";
 
 @Injectable()
 export class UserService {

@@ -5,17 +5,17 @@ import {Subject} from 'rxjs/Subject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subscription} from 'rxjs/Subscription';
 import {Page} from "@sgc/_model/page";
-import {CommandService} from "@sgc/_service/command/command.service";
-import {Command} from "@sgc/_model/command";
+import {Mission} from "@sgc/_model/mission";
+import {MissionService} from "@sgc/_service/mission/mission.service";
 
 @Injectable()
-export class CommandListService extends DataSource<Command> {
-  public page: Subject<Page<Command>> = new Subject();
+export class MissionListService extends DataSource<Mission> {
+  public page: Subject<Page<Mission>> = new Subject();
   public pageLoading: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private currentRequest: Subscription;
 
   constructor(
-    private commandService: CommandService) {
+    private missionService: MissionService) {
     super();
   }
 
@@ -28,7 +28,7 @@ export class CommandListService extends DataSource<Command> {
       this.pageLoading.next(true);
     }
 
-    this.currentRequest = this.commandService.getPage(page, size).subscribe(
+    this.currentRequest = this.missionService.getPage(page, size).subscribe(
       page => {
         this.page.next(page);
       },
@@ -42,7 +42,7 @@ export class CommandListService extends DataSource<Command> {
   }
 
 
-  connect(collectionViewer: CollectionViewer): Observable<Command[]> {
+  connect(collectionViewer: CollectionViewer): Observable<Mission[]> {
     return this.page.map((page) => page.content);
   }
 

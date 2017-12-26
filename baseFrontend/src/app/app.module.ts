@@ -16,9 +16,6 @@ import {BaseListPageComponent} from "@sgc/_component/page/temp/base-list-page/ba
 import {ZoneListPageComponent} from "@sgc/_component/page/zone-list-page/zone-list-page.component";
 import {ZonePageComponent} from "@sgc/_component/page/temp/zone-page/zone-page.component";
 import {ZoneCreatePageComponent} from "@sgc/_component/page/temp/zone-create-page/zone-create-page.component";
-import {MissionCreatePageComponent} from "@sgc/_component/page/temp/mission-create-page/mission-create-page.component";
-import {MissionListPageComponent} from "@sgc/_component/page/temp/mission-list-page/mission-list-page.component";
-import {MissionPageComponent} from "@sgc/_component/page/temp/mission-page/mission-page.component";
 import {UserPageComponent} from "@sgc/_component/page/temp/user-page/user-page.component";
 import {UserListPageComponent} from "@sgc/_component/page/user-list-page/user-list-page.component";
 import {UserCreatePageComponent} from "@sgc/_component/page/temp/user-create-page/user-create-page.component";
@@ -45,6 +42,13 @@ import {CommandListPageComponent} from "@sgc/_component/page/command-list-page/c
 import {ZoneListComponent} from "@sgc/_component/zone/zone-list/zone-list.component";
 import {ZoneService} from "@sgc/_service/zone/zone.service";
 import {ZoneListService} from "@sgc/_service/zone/zone-list.service";
+import {MissionListComponent} from "@sgc/_component/mission/mission-list/mission-list.component";
+import {MissionService} from "@sgc/_service/mission/mission.service";
+import {MissionListService} from "@sgc/_service/mission/mission-list.service";
+import {MissionCreateComponent} from "@sgc/_component/mission/mission-create/mission-create.component";
+import {MissionPageComponent} from "@sgc/_component/page/temp/mission-page/mission-page.component";
+import {MissionListPageComponent} from "@sgc/_component/page/mission-list-page/mission-list-page.component";
+import {MissionCreatePageComponent} from "@sgc/_component/page/mission-create-page/mission-create-page.component";
 
 
 @NgModule({
@@ -60,8 +64,6 @@ import {ZoneListService} from "@sgc/_service/zone/zone-list.service";
     BaseListPageComponent,
     ZonePageComponent,
     ZoneCreatePageComponent,
-    MissionCreatePageComponent,
-    MissionListPageComponent,
     MissionPageComponent,
     UserPageComponent,
     UserCreatePageComponent,
@@ -77,11 +79,17 @@ import {ZoneListService} from "@sgc/_service/zone/zone-list.service";
     UserListPageComponent,
     CommandListPageComponent,
     ZoneListPageComponent,
+    MissionListPageComponent,
+
+    MissionCreatePageComponent,
 
     ListComponent,
     UserListComponent,
     CommandListComponent,
-    ZoneListComponent
+    ZoneListComponent,
+    MissionListComponent,
+
+    MissionCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +117,9 @@ import {ZoneListService} from "@sgc/_service/zone/zone-list.service";
     CommandService,
     CommandListService,
     ZoneService,
-    ZoneListService
+    ZoneListService,
+    MissionService,
+    MissionListService
   ],
   bootstrap: [AppComponent]
 })

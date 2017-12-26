@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Command} from "@sgc/_model/command";
+import {Zone} from "@sgc/_model/zone";
 
 @Injectable()
 export class CommandService {
@@ -17,6 +18,15 @@ export class CommandService {
       .append('size', `${size}`);
     return this.http.get<Page<Command>>(
       `/${environment.context}/${environment.api.command}`,
+      { params }
+    );
+  }
+
+  findByCommandTypeName(query:string): Observable<Command[]> {
+    const params: HttpParams = new HttpParams()
+      .append('query', `${query}`);
+    return this.http.get<Command[]>(
+      `/${environment.context}/${environment.api.command}/${environment.api.find}`,
       { params }
     );
   }

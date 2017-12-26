@@ -22,4 +22,13 @@ export class ZoneService {
     );
   }
 
+  findByZoneName(query:string): Observable<Zone[]> {
+    const params: HttpParams = new HttpParams()
+      .append('query', `${query}`);
+    return this.http.get<Zone[]>(
+      `/${environment.context}/${environment.api.zone}/${environment.api.find}`,
+      { params }
+    );
+  }
+
 }

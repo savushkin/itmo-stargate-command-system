@@ -1,0 +1,41 @@
+<mat-table #table [dataSource]="dataSource">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> Номер </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-raised-button color="primary" [routerLink]="['/mission', row.id]">
+        {{row.id}}
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="zone">
+    <mat-header-cell *matHeaderCellDef> Зона </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        {{row.zone.name}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="command">
+    <mat-header-cell *matHeaderCellDef> Отряд </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        {{row.command.id}} - {{row.command?.commandType?.typeName}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef> Дата отправления </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row.date | date}}
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+</mat-table>
+<mat-progress-bar
+  *ngIf="pageLoading"
+  color="primary"
+  mode="indeterminate">
+</mat-progress-bar>
+<mat-paginator #paginator
+               [length]="itemsCount"
+               [pageIndex]="pageIndex"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions">
+</mat-paginator>

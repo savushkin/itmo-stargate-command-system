@@ -12,8 +12,11 @@ export const environment = {
     logout: 'logout'
   },
   api: {
+    find: 'find',
+
     user: 'user',
     command: 'command',
-    zone: 'zone'
+    zone: 'zone',
+    mission: 'mission'
   }
 };

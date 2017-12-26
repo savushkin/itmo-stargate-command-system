@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/api/zone")
 public class ZoneController {
@@ -31,6 +33,17 @@ public class ZoneController {
         try {
             Page<Zone> page = zoneRepository.findAll(new PageRequest(pageNum, size));
             return new ResponseEntity(page, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(path="/find", method = RequestMethod.GET)
+    public ResponseEntity findByName(
+            @RequestParam(name = "query", defaultValue = "") String query) {
+        try {
+            List<Zone> zones = zoneRepository.findByNameStartingWithOrderByName(query);
+            return new ResponseEntity(zones, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
