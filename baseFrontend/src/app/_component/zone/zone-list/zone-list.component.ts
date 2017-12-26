@@ -4,30 +4,32 @@ import {PageEvent} from '@angular/material';
 import 'rxjs/add/operator/map'
 import {ListComponent} from "@sgc/_component/common/list/list.component";
 import {CommandListService} from "@sgc/_service/command/command-list.service";
-import {Command} from "@sgc/_model/command";
+import {User} from "@sgc/_model/user";
+import {Zone} from "@sgc/_model/zone";
+import {ZoneListService} from "@sgc/_service/zone/zone-list.service";
 
 @Component({
-  selector: 'sgc-command-list',
-  templateUrl: './command-list.component.html',
-  styleUrls: ['./command-list.component.scss']
+  selector: 'sgc-zone-list',
+  templateUrl: './zone-list.component.html',
+  styleUrls: ['./zone-list.component.scss']
 })
-export class CommandListComponent
-  extends ListComponent<Command, CommandListService>
+export class ZoneListComponent
+  extends ListComponent<Zone, ZoneListService>
   implements OnInit {
 
   constructor(route: ActivatedRoute,
               router: Router,
-              commandListService: CommandListService) {
+              zoneListService: ZoneListService) {
     super(route, router);
-    this.dataSource = commandListService;
-    this.pageIndexParamName = 'command_page';
-    this.pageSizeParamName = 'command_size';
+    this.dataSource = zoneListService;
+    this.pageIndexParamName = 'zone_page';
+    this.pageSizeParamName = 'zone_size';
   }
 
   ngOnInit() {
     super.ngOnInit();
 
-    this.columns = ['number', 'members'];
+    this.columns = ['zone', 'glyphs'];
 
     this.pagination.page.subscribe(
       (event: PageEvent) => {

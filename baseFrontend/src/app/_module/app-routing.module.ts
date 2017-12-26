@@ -5,6 +5,7 @@ import {LogoutPageComponent} from "@sgc/_component/page/logout-page/logout-page.
 import {ProfilePageComponent} from "@sgc/_component/page/profile-page/profile-page.component";
 import {UserListPageComponent} from "@sgc/_component/page/user-list-page/user-list-page.component";
 import {CommandListPageComponent} from "@sgc/_component/page/command-list-page/command-list-page.component";
+import {ZoneListPageComponent} from "@sgc/_component/page/zone-list-page/zone-list-page.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,13 @@ const routes: Routes = [
   {
     path: 'command',
     component: CommandListPageComponent,
+    children: [
+
+    ]
+  },
+  {
+    path: 'zone',
+    component: ZoneListPageComponent,
     children: [
 
     ]

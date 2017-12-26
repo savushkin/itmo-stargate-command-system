@@ -1,20 +1,27 @@
 <mat-table #table [dataSource]="dataSource">
-  <ng-container matColumnDef="number">
-    <mat-header-cell *matHeaderCellDef> Номер </mat-header-cell>
+  <ng-container matColumnDef="zone">
+    <mat-header-cell *matHeaderCellDef> Зона </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <button mat-raised-button color="primary" [routerLink]="['/command', row.id]">
-        {{row.id}}
+      <button mat-raised-button color="primary" [routerLink]="['/zone', row.id]">
+        {{row.name}}
       </button>
     </mat-cell>
   </ng-container>
-  <ng-container matColumnDef="members">
-    <mat-header-cell *matHeaderCellDef> Участники </mat-header-cell>
+  <ng-container matColumnDef="glyphs">
+    <mat-header-cell *matHeaderCellDef> Адресс </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <ul>
-        <li *ngFor="let member of row.members">
-          {{member.username}}
-        </li>
-      </ul>
+      <sgc-glyph [id]="row.glyph1">
+      </sgc-glyph>
+      <sgc-glyph [id]="row.glyph2">
+      </sgc-glyph>
+      <sgc-glyph [id]="row.glyph3">
+      </sgc-glyph>
+      <sgc-glyph [id]="row.glyph4">
+      </sgc-glyph>
+      <sgc-glyph [id]="row.glyph5">
+      </sgc-glyph>
+      <sgc-glyph [id]="row.glyph6">
+      </sgc-glyph>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="columns"></mat-header-row>

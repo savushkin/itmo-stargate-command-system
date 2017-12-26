@@ -30,15 +30,12 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
 
-                .antMatchers("/api/command").hasRole(ROLE_COMMANDER)
-                .antMatchers("/api/command/**").hasRole(ROLE_COMMANDER)
-                .antMatchers("/api/user").hasRole(ROLE_COMMANDER)
-                .antMatchers("/api/user/**").hasRole(ROLE_COMMANDER)
-
-                .antMatchers("/api/command").hasRole(ROLE_ADMIN)
-                .antMatchers("/api/command/**").hasRole(ROLE_ADMIN)
-                .antMatchers("/api/user").hasRole(ROLE_ADMIN)
-                .antMatchers("/api/user/**").hasRole(ROLE_ADMIN)
+                .antMatchers("/api/command").hasAnyRole(ROLE_ADMIN, ROLE_COMMANDER)
+                .antMatchers("/api/command/**").hasAnyRole(ROLE_ADMIN, ROLE_COMMANDER)
+                .antMatchers("/api/user").hasAnyRole(ROLE_ADMIN, ROLE_COMMANDER)
+                .antMatchers("/api/user/**").hasAnyRole(ROLE_ADMIN, ROLE_COMMANDER)
+                .antMatchers("/api/zone").hasAnyRole(ROLE_ADMIN, ROLE_COMMANDER)
+                .antMatchers("/api/zone/**").hasAnyRole(ROLE_ADMIN, ROLE_COMMANDER)
 
                 .antMatchers("/api/**").hasRole(ROLE_USER)
                 .antMatchers("/auth/login").permitAll()

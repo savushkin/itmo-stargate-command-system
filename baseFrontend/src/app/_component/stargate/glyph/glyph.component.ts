@@ -13,7 +13,7 @@ export class GlyphComponent implements OnInit, OnChanges {
   name:string = null;
   @Input()
   id:number = null;
-  private url = null;
+  url = null;
 
   constructor(private glyphService:GlyphService) { }
 

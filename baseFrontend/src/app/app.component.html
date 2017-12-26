@@ -10,16 +10,16 @@
       <!--<span>
         Данные синхронизированы
       </span>-->
-     <!-- <button mat-raised-button color="accent">
-        Обновить данные
-      </button>-->
+      <!-- <button mat-raised-button color="accent">
+         Обновить данные
+       </button>-->
       <!--<button mat-raised-button color="warn">
         S.O.S.
       </button>-->
     </mat-toolbar>
   </div>
   <mat-sidenav-container #sidenavContainer [style.min-height.px]="minHeight">
-    <mat-sidenav mode="side" opened="true">
+    <mat-sidenav mode="side" opened="true" style="min-width: 200px;">
       <mat-nav-list>
         <ng-container *ngFor="let nav of sidenavLinks;">
           <a mat-list-item [routerLink]="[nav.url]" >
@@ -27,79 +27,6 @@
           </a>
           <mat-divider></mat-divider>
         </ng-container>
-
-        <!--<mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/stargate']">
-            Звёздные врата
-          </button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <h3 mat-subheader>Адреса врат</h3>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/address', 'list']">
-            Список
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/address']">
-            Создать
-          </button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <h3 mat-subheader>Базы Звёздных врат</h3>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/base', 'list']">
-            Список
-          </button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <h3 mat-subheader>Миссии</h3>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/mission', 'list']">
-            Список
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/mission']">
-            Создать
-          </button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <h3 mat-subheader>Отчёты</h3>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/report', 'list']">
-            Список
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/report']">
-            Создать
-          </button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <h3 mat-subheader>Пользователи</h3>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/user', 'list']">
-            Список
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/user']">
-            Создать
-          </button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <h3 mat-subheader>Зоны</h3>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/zone', 'list']">
-            Список
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/zone']">
-            Создать
-          </button>
-        </mat-list-item>-->
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

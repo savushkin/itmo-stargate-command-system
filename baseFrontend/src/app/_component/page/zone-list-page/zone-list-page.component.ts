@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PageHeightService} from "@sgc/_service/page/page-height.service";
+import {PageHeightService} from "app/_service/page/page-height.service";
 
 @Component({
   selector: 'sgc-zone-list-page',

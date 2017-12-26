@@ -5,28 +5,19 @@ import {Observable} from "rxjs/Observable";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Command} from "@sgc/_model/command";
+import {Zone} from "@sgc/_model/zone";
 
 @Injectable()
-export class CommandService {
+export class ZoneService {
 
   constructor(private http: HttpClient) { }
 
-  getPage(page: number, size: number): Observable<Page<Command>> {
+  getPage(page: number, size: number): Observable<Page<Zone>> {
     const params: HttpParams = new HttpParams()
       .append('page', `${page}`)
       .append('size', `${size}`);
-    return this.http.get<Page<Command>>(
-      `/${environment.context}/${environment.api.command}`,
-      { params }
-    );
-  }
-
-  getTypesPage(page: number, size: number): Observable<Page<User>> {
-    const params: HttpParams = new HttpParams()
-      .append('page', `${page}`)
-      .append('size', `${size}`);
-    return this.http.get<Page<User>>(
-      `/${environment.context}/${environment.api.command}`,
+    return this.http.get<Page<Zone>>(
+      `/${environment.context}/${environment.api.zone}`,
       { params }
     );
   }

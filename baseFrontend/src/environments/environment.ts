@@ -14,5 +14,6 @@ export const environment = {
   api: {
     user: 'user',
     command: 'command',
+    zone: 'zone'
   }
 };

@@ -37,6 +37,10 @@ export class SidenavService {
               name: 'Список комманд',
               url: '/command'
             });
+            navs.push({
+              name: 'Список зон',
+              url: '/zone'
+            });
             break;
           case 'ROLE_COMMANDER':
             navs.push({
@@ -46,6 +50,10 @@ export class SidenavService {
             navs.push({
               name: 'Список комманд',
               url: '/command'
+            });
+            navs.push({
+              name: 'Список зон',
+              url: '/zone'
             });
             break;
           case 'ROLE_USER':

@@ -1,7 +1,7 @@
 package me.savushkin.stargate.base.baseApp.command.controller;
 
-import me.savushkin.stargate.base.baseApp.command.model.Command;
-import me.savushkin.stargate.base.baseApp.command.repository.CommandRepository;
+import me.savushkin.stargate.base.baseApp.command.model.CommandType;
+import me.savushkin.stargate.base.baseApp.command.repository.CommandTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/api/command")
-public class CommandController {
-    private final CommandRepository commandRepository;
+@RequestMapping("/api/command-type")
+public class CommandTypeController {
+    private final CommandTypeRepository commandTypeRepository;
 
     @Autowired
-    public CommandController(CommandRepository commandRepository) {
-        this.commandRepository = commandRepository;
+    public CommandTypeController(CommandTypeRepository commandTypeRepository) {
+        this.commandTypeRepository = commandTypeRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -27,7 +27,7 @@ public class CommandController {
             @RequestParam(name = "page", defaultValue = "0") Integer pageNum,
             @RequestParam(name = "size", defaultValue = "15") Integer size) {
         try {
-            Page<Command> page = commandRepository.findAll(new PageRequest(pageNum, size));
+            Page<CommandType> page = commandTypeRepository.findAll(new PageRequest(pageNum, size));
             return new ResponseEntity(page, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

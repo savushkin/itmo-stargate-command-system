@@ -1,7 +1,9 @@
-package me.savushkin.stargate.base.baseApp.command.controller;
+package me.savushkin.stargate.base.baseApp.planet.controller;
 
 import me.savushkin.stargate.base.baseApp.command.model.Command;
 import me.savushkin.stargate.base.baseApp.command.repository.CommandRepository;
+import me.savushkin.stargate.base.baseApp.planet.model.Zone;
+import me.savushkin.stargate.base.baseApp.planet.repository.ZoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/api/command")
-public class CommandController {
-    private final CommandRepository commandRepository;
+@RequestMapping("/api/zone")
+public class ZoneController {
+    private final ZoneRepository zoneRepository;
 
     @Autowired
-    public CommandController(CommandRepository commandRepository) {
-        this.commandRepository = commandRepository;
+    public ZoneController(ZoneRepository zoneRepository) {
+        this.zoneRepository = zoneRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -27,7 +29,7 @@ public class CommandController {
             @RequestParam(name = "page", defaultValue = "0") Integer pageNum,
             @RequestParam(name = "size", defaultValue = "15") Integer size) {
         try {
-            Page<Command> page = commandRepository.findAll(new PageRequest(pageNum, size));
+            Page<Zone> page = zoneRepository.findAll(new PageRequest(pageNum, size));
             return new ResponseEntity(page, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

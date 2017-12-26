@@ -4,19 +4,18 @@ import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Subscription} from 'rxjs/Subscription';
-import {User} from "@sgc/_model/user";
 import {Page} from "@sgc/_model/page";
-import {CommandService} from "@sgc/_service/command/command.service";
-import {Command} from "@sgc/_model/command";
+import {Zone} from "@sgc/_model/zone";
+import {ZoneService} from "@sgc/_service/zone/zone.service";
 
 @Injectable()
-export class CommandListService extends DataSource<any> {
-  public page: Subject<Page<Command>> = new Subject();
+export class ZoneListService extends DataSource<Zone> {
+  public page: Subject<Page<Zone>> = new Subject();
   public pageLoading: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private currentRequest: Subscription;
 
   constructor(
-    private commandService: CommandService) {
+    private zoneService: ZoneService) {
     super();
   }
 
@@ -29,7 +28,7 @@ export class CommandListService extends DataSource<any> {
       this.pageLoading.next(true);
     }
 
-    this.currentRequest = this.commandService.getPage(page, size).subscribe(
+    this.currentRequest = this.zoneService.getPage(page, size).subscribe(
       page => {
         this.page.next(page);
       },
@@ -43,7 +42,7 @@ export class CommandListService extends DataSource<any> {
   }
 
 
-  connect(collectionViewer: CollectionViewer): Observable<Command[]> {
+  connect(collectionViewer: CollectionViewer): Observable<Zone[]> {
     return this.page.map((page) => page.content);
   }
 
