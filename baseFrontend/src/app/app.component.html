@@ -13,26 +13,22 @@
      <!-- <button mat-raised-button color="accent">
         Обновить данные
       </button>-->
-      <button mat-raised-button color="warn">
+      <!--<button mat-raised-button color="warn">
         S.O.S.
-      </button>
+      </button>-->
     </mat-toolbar>
   </div>
   <mat-sidenav-container #sidenavContainer [style.min-height.px]="minHeight">
     <mat-sidenav mode="side" opened="true">
-      <mat-list>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/login']">
-            Войти
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button mat-raised-button class="side-menu-link" [routerLink]="['/logout']">
-            Выйти
-          </button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
+      <mat-nav-list>
+        <ng-container *ngFor="let nav of sidenavLinks;">
+          <a mat-list-item [routerLink]="[nav.url]" >
+            {{nav.name}}
+          </a>
+          <mat-divider></mat-divider>
+        </ng-container>
+
+        <!--<mat-list-item>
           <button mat-raised-button class="side-menu-link" [routerLink]="['/stargate']">
             Звёздные врата
           </button>
@@ -103,8 +99,8 @@
           <button mat-raised-button class="side-menu-link" [routerLink]="['/zone']">
             Создать
           </button>
-        </mat-list-item>
-      </mat-list>
+        </mat-list-item>-->
+      </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
       <router-outlet>

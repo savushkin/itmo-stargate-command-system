@@ -1,0 +1,33 @@
+<mat-table #table [dataSource]="dataSource">
+  <ng-container matColumnDef="number">
+    <mat-header-cell *matHeaderCellDef> Номер </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-raised-button color="primary" [routerLink]="['/command', row.id]">
+        {{row.username}}
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="members">
+    <mat-header-cell *matHeaderCellDef> Участники </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <ul>
+        <li *ngFor="let member of row.members">
+          {{member.username}}
+        </li>
+      </ul>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+</mat-table>
+<mat-progress-bar
+  *ngIf="pageLoading"
+  color="primary"
+  mode="indeterminate">
+</mat-progress-bar>
+<mat-paginator #paginator
+               [length]="itemsCount"
+               [pageIndex]="pageIndex"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions">
+</mat-paginator>

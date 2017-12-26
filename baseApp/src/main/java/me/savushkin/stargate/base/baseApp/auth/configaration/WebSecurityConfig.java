@@ -14,6 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private final static String ROLE_ADMIN = "ADMINISTRATOR";
+    private final static String ROLE_USER = "USER";
+    private final static String ROLE_COMMANDER = "COMMANDER";
 
     private final UserDetailsService userDetailsService;
 
@@ -26,23 +29,21 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/api/**").hasRole("USER")
+
+                .antMatchers("/api/command").hasRole(ROLE_COMMANDER)
+                .antMatchers("/api/command/**").hasRole(ROLE_COMMANDER)
+                .antMatchers("/api/user").hasRole(ROLE_COMMANDER)
+                .antMatchers("/api/user/**").hasRole(ROLE_COMMANDER)
+
+                .antMatchers("/api/command").hasRole(ROLE_ADMIN)
+                .antMatchers("/api/command/**").hasRole(ROLE_ADMIN)
+                .antMatchers("/api/user").hasRole(ROLE_ADMIN)
+                .antMatchers("/api/user/**").hasRole(ROLE_ADMIN)
+
+                .antMatchers("/api/**").hasRole(ROLE_USER)
+                .antMatchers("/auth/login").permitAll()
                     .and()
-                .formLogin()
-                    .loginProcessingUrl("/api/login")
-                    .loginPage("/login")
-                    .failureHandler((request, response, exception) -> {
-                        response.sendError(HttpStatus.FORBIDDEN.value());
-                    })
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .and()
-                .logout()
-                    .logoutUrl("/api/logout")
-                    .and()
-                    .exceptionHandling().accessDeniedPage("/403")
-                    .and()
-                    .csrf().disable();
+                .csrf().disable();
     }
 
     @Autowired

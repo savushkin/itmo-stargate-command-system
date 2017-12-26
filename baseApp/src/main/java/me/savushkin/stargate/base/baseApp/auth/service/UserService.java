@@ -13,8 +13,12 @@ import java.util.stream.Collectors;
 
 @Service("userService")
 public class UserService implements org.springframework.security.core.userdetails.UserDetailsService {
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Transactional(readOnly=true)
     @Override
@@ -38,5 +42,4 @@ public class UserService implements org.springframework.security.core.userdetail
                         .map(role -> new SimpleGrantedAuthority(role.getRole()))
                         .collect(Collectors.toList()));
     }
-
 }

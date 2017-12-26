@@ -18,4 +18,21 @@
       </mat-card-actions>
     </mat-card>
   </form>
+
+  <mat-card class="login-card" *ngIf="user">
+    <mat-card-title>
+      Пользователь {{user.username}}
+    </mat-card-title>
+    <mat-card-content class="login-card__content">
+      РОЛИ:
+      <ul>
+        <li *ngFor="let role of user.userRole">
+          {{role.role}}
+        </li>
+      </ul>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button routerLink="/logout" color="warn">Выйти</button>
+    </mat-card-actions>
+  </mat-card>
 </div>

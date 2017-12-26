@@ -1,42 +1,53 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
-import {AppRoutingModule} from './_module/app-routing.module';
-import {AppComponent} from './app.component';
+import {AppComponent} from "@sgc/app.component";
+import {PageComponent} from "@sgc/_component/page/page/page.component";
+import {ProfilePageComponent} from "@sgc/_component/page/profile-page/profile-page.component";
+import {PageNotFoundComponent} from "@sgc/_component/page/page-not-found/page-not-found.component";
+import {LoginPageComponent} from "@sgc/_component/page/login-page/login-page.component";
+import {LogoutPageComponent} from "@sgc/_component/page/logout-page/logout-page.component";
+import {ReportListPageComponent} from "@sgc/_component/page/temp/report-list-page/report-list-page.component";
+import {ReportPageComponent} from "@sgc/_component/page/temp/report-page/report-page.component";
+import {AddressListPageComponent} from "@sgc/_component/page/temp/address-list-page/address-list-page.component";
+import {AddressPageComponent} from "@sgc/_component/page/temp/address-page/address-page.component";
+import {ReportCreatePageComponent} from "@sgc/_component/page/temp/report-create-page/report-create-page.component";
+import {AddressCreatePageComponent} from "@sgc/_component/page/temp/address-create-page/address-create-page.component";
+import {BaseListPageComponent} from "@sgc/_component/page/temp/base-list-page/base-list-page.component";
+import {ZoneListPageComponent} from "@sgc/_component/page/temp/zone-list-page/zone-list-page.component";
+import {ZonePageComponent} from "@sgc/_component/page/temp/zone-page/zone-page.component";
+import {ZoneCreatePageComponent} from "@sgc/_component/page/temp/zone-create-page/zone-create-page.component";
+import {MissionCreatePageComponent} from "@sgc/_component/page/temp/mission-create-page/mission-create-page.component";
+import {MissionListPageComponent} from "@sgc/_component/page/temp/mission-list-page/mission-list-page.component";
+import {MissionPageComponent} from "@sgc/_component/page/temp/mission-page/mission-page.component";
+import {UserPageComponent} from "@sgc/_component/page/temp/user-page/user-page.component";
+import {UserListPageComponent} from "@sgc/_component/page/user-list-page/user-list-page.component";
+import {UserCreatePageComponent} from "@sgc/_component/page/temp/user-create-page/user-create-page.component";
+import {StargatePageComponent} from "@sgc/_component/page/temp/stargate-page/stargate-page.component";
+import {GlyphComponent} from "@sgc/_component/stargate/glyph/glyph.component";
+import {ListComponent} from "@sgc/_component/common/list/list.component";
+import {UserListComponent} from "@sgc/_component/user/user-list/user-list.component";
+import {CommandListComponent} from "@sgc/_component/command/command-list/command-list.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {AppMaterialModule} from "./_module/app-material.module";
-import {PageNotFoundComponent} from './_component/page/page-not-found/page-not-found.component';
-import {LoginPageComponent} from './_component/page/login-page/login-page.component';
-import {LogoutPageComponent} from './_component/page/logout-page/logout-page.component';
-import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
-import {PageHeightService} from "./_service/page/page-height.service";
-import {ReportListPageComponent} from './_component/page/report-list-page/report-list-page.component';
-import {ReportPageComponent} from './_component/page/report-page/report-page.component';
-import {AddressListPageComponent} from './_component/page/address-list-page/address-list-page.component';
-import {AddressPageComponent} from './_component/page/address-page/address-page.component';
-import {ReportCreatePageComponent} from './_component/page/report-create-page/report-create-page.component';
-import {AddressCreatePageComponent} from './_component/page/address-create-page/address-create-page.component';
-import {BaseListPageComponent} from './_component/page/base-list-page/base-list-page.component';
-import {ZoneListPageComponent} from './_component/page/zone-list-page/zone-list-page.component';
-import {ZonePageComponent} from './_component/page/zone-page/zone-page.component';
-import {ZoneCreatePageComponent} from './_component/page/zone-create-page/zone-create-page.component';
-import {MissionCreatePageComponent} from './_component/page/mission-create-page/mission-create-page.component';
-import {MissionListPageComponent} from './_component/page/mission-list-page/mission-list-page.component';
-import {MissionPageComponent} from './_component/page/mission-page/mission-page.component';
-import {UserPageComponent} from './_component/page/user-page/user-page.component';
-import {UserListPageComponent} from './_component/page/user-list-page/user-list-page.component';
-import {UserCreatePageComponent} from './_component/page/user-create-page/user-create-page.component';
-import {StargatePageComponent} from './_component/page/stargate-page/stargate-page.component';
-import {GlyphService} from "./_service/stargate/glyph.service";
-import { GlyphComponent } from './_component/stargate/glyph/glyph.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AppMaterialModule} from "@sgc/_module/app-material.module";
+import {AppRoutingModule} from "@sgc/_module/app-routing.module";
+import {PageHeightService} from "@sgc/_service/page/page-height.service";
+import {GlyphService} from "@sgc/_service/stargate/glyph.service";
+import {AuthService} from "@sgc/_service/user/auth.service";
+import {SidenavService} from "@sgc/_service/page/sidenav.service";
+import {BaseHttpInterceptorService} from "@sgc/_service/network/base-http-interceptor.service";
+import {UserService} from "@sgc/_service/user/user.service";
+import {UserListService} from "@sgc/_service/user/user-list.service";
+import {CommandService} from "@sgc/_service/command/command.service";
+import {CommandListService} from "@sgc/_service/command/command-list.service";
+import {CommandListPageComponent} from "@sgc/_component/page/command-list-page/command-list-page.component";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent,
-    LoginPageComponent,
-    LogoutPageComponent,
+
     ReportListPageComponent,
     ReportPageComponent,
     AddressListPageComponent,
@@ -51,15 +62,27 @@ import { GlyphComponent } from './_component/stargate/glyph/glyph.component';
     MissionListPageComponent,
     MissionPageComponent,
     UserPageComponent,
-    UserListPageComponent,
     UserCreatePageComponent,
     StargatePageComponent,
-    GlyphComponent
+    GlyphComponent,
+
+    PageComponent,
+    ProfilePageComponent,
+    PageNotFoundComponent,
+    LoginPageComponent,
+    LogoutPageComponent,
+    UserListPageComponent,
+    CommandListPageComponent,
+
+    ListComponent,
+    UserListComponent,
+    CommandListComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
 
     AppMaterialModule,
@@ -67,7 +90,19 @@ import { GlyphComponent } from './_component/stargate/glyph/glyph.component';
   ],
   providers: [
     PageHeightService,
-    GlyphService
+    GlyphService,
+    AuthService,
+    SidenavService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BaseHttpInterceptorService,
+      multi: true
+    },
+
+    UserService,
+    UserListService,
+    CommandService,
+    CommandListService
   ],
   bootstrap: [AppComponent]
 })
