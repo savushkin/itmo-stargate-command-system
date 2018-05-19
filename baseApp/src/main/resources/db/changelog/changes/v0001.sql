@@ -67,7 +67,7 @@ CREATE TABLE zone (
 CREATE  TABLE mission (
   id BIGSERIAL NOT NULL,
   name varchar (200) NOT NULL ,
-  zoneTo_id BIGINT NOT NULL REFERENCES "zone" (id),
+  zone_to_id BIGINT NOT NULL REFERENCES "zone" (id),
   date_create DATE NOT NULL,
   date_departure DATE NOT NULL,
   command_departure BIGINT NOT NULL REFERENCES "command" (id),

@@ -1,6 +1,7 @@
 package me.savushkin.stargate.base.baseApp.mission.model;
 
 import lombok.Data;
+import me.savushkin.stargate.base.baseApp.auth.model.User;
 import me.savushkin.stargate.base.baseApp.command.model.Command;
 import me.savushkin.stargate.base.baseApp.planet.model.Zone;
 
@@ -34,10 +35,14 @@ public class Mission {
     private Date dateDeparture;
 
     @ManyToOne
-    @JoinColumn(name = "zone_id")
+    @JoinColumn(name = "zone_to_id")
     private Zone zone;
 
     @ManyToOne
     @JoinColumn(name = "command_departure")
     private Command command;
+
+    @ManyToOne
+    @JoinColumn(name = "who_last_edit")
+    private User whoLastEdit;
 }
