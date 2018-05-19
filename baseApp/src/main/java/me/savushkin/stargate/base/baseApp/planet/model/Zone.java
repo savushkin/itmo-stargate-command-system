@@ -19,31 +19,15 @@ public class Zone {
     @Column(name = "name", unique = true, nullable = false, length = 255)
     private String name;
 
-    @Column(name = "description", length = 4096)
-    private String description;
+    @Column(name = "climatic_conditions")
+    private String climatic_conditions;
 
-    @Column(name = "glyph_1")
-    private Integer glyph1;
+    @Column(name = "mititary_threats")
+    private String mititary_threats;
 
-    @Column(name = "glyph_2")
-    private Integer glyph2;
+    @Column(name = "minerals")
+    private String minerals;
 
-    @Column(name = "glyph_3")
-    private Integer glyph3;
-
-    @Column(name = "glyph_4")
-    private Integer glyph4;
-
-    @Column(name = "glyph_5")
-    private Integer glyph5;
-
-    @Column(name = "glyph_6")
-    private Integer glyph6;
-
-    @Column(name = "glyph_7")
-    private Integer glyph7;
-
-    @Column(name = "glyph_8")
-    private Integer glyph8;
-
+    @OneToOne(fetch = FetchType.LAZY)
+    private AddressStarGate addressStarGate;
 }

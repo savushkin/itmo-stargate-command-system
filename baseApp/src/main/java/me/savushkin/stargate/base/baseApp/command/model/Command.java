@@ -19,12 +19,16 @@ public class Command {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @ManyToOne
-    @JoinColumn(name = "command_type_id")
+    @JoinColumn(name = "type_id")
     private CommandType commandType;
+
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "command", cascade = CascadeType.ALL)
     private Set<User> members = new HashSet<>(0);
-
-
 }

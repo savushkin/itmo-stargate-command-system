@@ -18,7 +18,9 @@ public class CommandType {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "type_name", unique = true, nullable = false)
+    @Column(name = "name", unique = true, nullable = false)
     private String typeName;
 
+    @Column(name = "description")
+    private String description;
 }

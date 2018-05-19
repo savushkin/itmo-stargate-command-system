@@ -22,6 +22,18 @@ public class User {
     @Column(name = "username", unique = true, nullable = false, length = 45)
     private String username;
 
+    @Column(name = "name", nullable = true, length = 200)
+    private String name;
+
+    @Column(name = "second_name", nullable = true, length = 200)
+    private String second_name;
+
+    @Column(name = "surname", nullable = true, length = 200)
+    private String surname;
+
+    @Column(name = "rank", nullable = true, length = 200)
+    private String rank;
+
     @JsonIgnore
     @Column(name = "password", nullable = false, length = 255)
     private String password;

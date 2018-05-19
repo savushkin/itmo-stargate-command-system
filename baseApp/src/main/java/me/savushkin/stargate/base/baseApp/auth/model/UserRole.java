@@ -22,7 +22,7 @@ public class UserRole {
     @Column(name = "user_id", unique = true, nullable = false)
     private Long user;
 
-    @Column(name = "role", nullable = false, length = 45)
+    @Column(name = "role", nullable = false, length = 200)
     private String role;
 
 }

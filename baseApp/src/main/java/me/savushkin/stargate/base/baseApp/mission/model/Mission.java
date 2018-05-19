@@ -21,18 +21,23 @@ public class Mission {
     @Column(name = "id", unique = true, nullable = false, columnDefinition = "serial")
     private Long id;
 
-    @Column(name = "description", length = 4096)
+    @Column(name = "name", length = 200, nullable = false)
+    private String name;
+
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "date", nullable = false)
-    private Date date;
+    @Column(name = "date_create", nullable = false)
+    private Date dateCreate;
+
+    @Column(name = "date_departure", nullable = false)
+    private Date dateDeparture;
 
     @ManyToOne
     @JoinColumn(name = "zone_id")
     private Zone zone;
 
     @ManyToOne
-    @JoinColumn(name = "command_id")
+    @JoinColumn(name = "command_departure")
     private Command command;
-
 }
