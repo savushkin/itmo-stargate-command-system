@@ -69,7 +69,6 @@ export class SidenavService {
       });
     }
     this.links.next(navs);
-    console.log(route);
   }
 
 }

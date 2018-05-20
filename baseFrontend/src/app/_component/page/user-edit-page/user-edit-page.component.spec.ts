@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BaseListPageComponent } from './base-list-page.component';
+import { UserEditPageComponent } from './user-edit-page.component';
 
-describe('BaseListPageComponent', () => {
-  let component: BaseListPageComponent;
-  let fixture: ComponentFixture<BaseListPageComponent>;
+describe('UserCreatePageComponent', () => {
+  let component: UserEditPageComponent;
+  let fixture: ComponentFixture<UserEditPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BaseListPageComponent ]
+      declarations: [ UserEditPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BaseListPageComponent);
+    fixture = TestBed.createComponent(UserEditPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

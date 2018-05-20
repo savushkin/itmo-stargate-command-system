@@ -27,7 +27,7 @@ export class UserListComponent
   ngOnInit() {
     super.ngOnInit();
 
-    this.columns = ['name', 'roles'];
+    this.columns = ['id', 'username', 'name', 'surname', 'rank', 'roles', 'command', 'icon-edit'];
 
     this.pagination.page.subscribe(
       (event: PageEvent) => {

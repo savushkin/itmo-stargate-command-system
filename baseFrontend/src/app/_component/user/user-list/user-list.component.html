@@ -1,10 +1,32 @@
 <mat-table #table [dataSource]="dataSource">
-  <ng-container matColumnDef="name">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row?.id}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="username">
     <mat-header-cell *matHeaderCellDef> Логин </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <button mat-raised-button color="primary" [routerLink]="['/user', row.id]">
-        {{row.username}}
-      </button>
+      {{row?.username}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Имя </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row?.name}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="surname">
+    <mat-header-cell *matHeaderCellDef> Фамилия </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row?.surname}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="rank">
+    <mat-header-cell *matHeaderCellDef> Звание </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row?.rank}}
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="roles">
@@ -15,6 +37,24 @@
           {{role.role}}
         </li>
       </ul>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="command">
+    <mat-header-cell *matHeaderCellDef> Комманда </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row?.command}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="icon-edit">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" routerLink="/user/create">
+        <mat-icon>add_box</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button color="primary" [routerLink]="['/user', row.id]">
+        <mat-icon>edit</mat-icon>
+      </button>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="columns"></mat-header-row>

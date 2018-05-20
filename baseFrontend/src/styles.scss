@@ -31,3 +31,10 @@ mat-form-field {
   width: 100%;
 }
 
+.mat-column-id,
+.mat-column-icon-edit,
+.mat-column-icon-delete,
+.mat-column-icon-view,
+.mat-column-icon-action{
+  flex: 0 0 40px !important;
+}

@@ -6,20 +6,8 @@ import {ProfilePageComponent} from "@sgc/_component/page/profile-page/profile-pa
 import {PageNotFoundComponent} from "@sgc/_component/page/page-not-found/page-not-found.component";
 import {LoginPageComponent} from "@sgc/_component/page/login-page/login-page.component";
 import {LogoutPageComponent} from "@sgc/_component/page/logout-page/logout-page.component";
-import {ReportListPageComponent} from "@sgc/_component/page/temp/report-list-page/report-list-page.component";
-import {ReportPageComponent} from "@sgc/_component/page/temp/report-page/report-page.component";
-import {AddressListPageComponent} from "@sgc/_component/page/temp/address-list-page/address-list-page.component";
-import {AddressPageComponent} from "@sgc/_component/page/temp/address-page/address-page.component";
-import {ReportCreatePageComponent} from "@sgc/_component/page/temp/report-create-page/report-create-page.component";
-import {AddressCreatePageComponent} from "@sgc/_component/page/temp/address-create-page/address-create-page.component";
-import {BaseListPageComponent} from "@sgc/_component/page/temp/base-list-page/base-list-page.component";
 import {ZoneListPageComponent} from "@sgc/_component/page/zone-list-page/zone-list-page.component";
-import {ZonePageComponent} from "@sgc/_component/page/temp/zone-page/zone-page.component";
-import {ZoneCreatePageComponent} from "@sgc/_component/page/temp/zone-create-page/zone-create-page.component";
-import {UserPageComponent} from "@sgc/_component/page/temp/user-page/user-page.component";
 import {UserListPageComponent} from "@sgc/_component/page/user-list-page/user-list-page.component";
-import {UserCreatePageComponent} from "@sgc/_component/page/temp/user-create-page/user-create-page.component";
-import {StargatePageComponent} from "@sgc/_component/page/temp/stargate-page/stargate-page.component";
 import {GlyphComponent} from "@sgc/_component/stargate/glyph/glyph.component";
 import {ListComponent} from "@sgc/_component/common/list/list.component";
 import {UserListComponent} from "@sgc/_component/user/user-list/user-list.component";
@@ -46,28 +34,28 @@ import {MissionListComponent} from "@sgc/_component/mission/mission-list/mission
 import {MissionService} from "@sgc/_service/mission/mission.service";
 import {MissionListService} from "@sgc/_service/mission/mission-list.service";
 import {MissionCreateComponent} from "@sgc/_component/mission/mission-create/mission-create.component";
-import {MissionPageComponent} from "@sgc/_component/page/temp/mission-page/mission-page.component";
 import {MissionListPageComponent} from "@sgc/_component/page/mission-list-page/mission-list-page.component";
 import {MissionCreatePageComponent} from "@sgc/_component/page/mission-create-page/mission-create-page.component";
+import {UserEditPageComponent} from "@sgc/_component/page/user-edit-page/user-edit-page.component";
+import {UserCreatePageComponent} from "@sgc/_component/page/user-create-page/user-create-page.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
 
-    ReportListPageComponent,
-    ReportPageComponent,
-    AddressListPageComponent,
-    AddressPageComponent,
-    ReportCreatePageComponent,
-    AddressCreatePageComponent,
-    BaseListPageComponent,
-    ZonePageComponent,
-    ZoneCreatePageComponent,
-    MissionPageComponent,
-    UserPageComponent,
-    UserCreatePageComponent,
-    StargatePageComponent,
+    // ReportListPageComponent,
+    // ReportPageComponent,
+    // AddressListPageComponent,
+    // AddressPageComponent,
+    // ReportCreatePageComponent,
+    // AddressCreatePageComponent,
+    // BaseListPageComponent,
+    // ZonePageComponent,
+    // ZoneCreatePageComponent,
+    // MissionPageComponent,
+    // UserPageComponent,
+    // StargatePageComponent,
 
     GlyphComponent,
 
@@ -76,6 +64,8 @@ import {MissionCreatePageComponent} from "@sgc/_component/page/mission-create-pa
     PageNotFoundComponent,
     LoginPageComponent,
     LogoutPageComponent,
+    UserCreatePageComponent,
+    UserEditPageComponent,
     UserListPageComponent,
     CommandListPageComponent,
     ZoneListPageComponent,

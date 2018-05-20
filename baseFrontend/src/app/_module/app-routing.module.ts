@@ -8,6 +8,8 @@ import {CommandListPageComponent} from "@sgc/_component/page/command-list-page/c
 import {ZoneListPageComponent} from "@sgc/_component/page/zone-list-page/zone-list-page.component";
 import {MissionListPageComponent} from "@sgc/_component/page/mission-list-page/mission-list-page.component";
 import {MissionCreatePageComponent} from "@sgc/_component/page/mission-create-page/mission-create-page.component";
+import {UserCreatePageComponent} from "@sgc/_component/page/user-create-page/user-create-page.component";
+import {UserEditPageComponent} from "@sgc/_component/page/user-edit-page/user-edit-page.component";
 
 const routes: Routes = [
   {
@@ -24,8 +26,20 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    component: UserListPageComponent,
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: UserListPageComponent,
+      },
+      {
+        path: 'create',
+        component: UserCreatePageComponent
+      },
+      {
+        path: ':id',
+        component: UserEditPageComponent
+      }
 
     ]
   },
