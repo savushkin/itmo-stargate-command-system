@@ -119,7 +119,6 @@ public class UserController {
                                  @RequestParam() String surname,
                                  @RequestParam() String rank,
                                  @RequestParam() Boolean isEnabled,
-                                 @RequestParam() Long commandId,
                                  @RequestParam() List<String> userRoles){
         try {
             User user = userRepository.findOne(id);
