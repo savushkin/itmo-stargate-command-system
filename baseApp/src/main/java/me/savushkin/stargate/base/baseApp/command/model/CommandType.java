@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class CommandType {
 
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
@@ -23,4 +23,7 @@ public class CommandType {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "commandType")
+    private Set<Command> commands = new HashSet<Command>();
 }

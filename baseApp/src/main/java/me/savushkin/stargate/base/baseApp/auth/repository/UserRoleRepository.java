@@ -4,5 +4,8 @@ import me.savushkin.stargate.base.baseApp.auth.model.UserRole;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface UserRoleRepository extends PagingAndSortingRepository<UserRole, String> {
+import java.util.List;
+
+public interface UserRoleRepository extends PagingAndSortingRepository<UserRole, Long> {
+    List<UserRole>findByUser(Long user);
 }

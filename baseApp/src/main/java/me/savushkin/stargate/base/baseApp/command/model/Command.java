@@ -2,9 +2,11 @@ package me.savushkin.stargate.base.baseApp.command.model;
 
 import lombok.Data;
 import me.savushkin.stargate.base.baseApp.auth.model.User;
+import me.savushkin.stargate.base.baseApp.mission.model.Mission;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.MissingFormatArgumentException;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -15,7 +17,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class Command {
 
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
@@ -30,5 +32,8 @@ public class Command {
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "command", cascade = CascadeType.ALL)
-    private Set<User> members = new HashSet<>(0);
+    private Set<User> members = new HashSet<User>();
+
+    @OneToMany(mappedBy = "command")
+    private Set<Mission> missions = new HashSet<>();
 }

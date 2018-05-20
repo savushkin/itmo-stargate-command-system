@@ -4,6 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
@@ -11,7 +14,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "address_star_gate")
 public class Shevron {
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
@@ -20,4 +23,7 @@ public class Shevron {
 
     @Column(name = "glyph", nullable = false)
     private Integer glyph;
+
+    @ManyToMany(mappedBy = "shevrons")
+    private Set<AddressStarGate> addressStarGates = new HashSet<>();
 }

@@ -42,7 +42,6 @@ public class Mission {
     @JoinColumn(name = "command_departure")
     private Command command;
 
-    @ManyToOne
-    @JoinColumn(name = "who_last_edit")
-    private User whoLastEdit;
+    @OneToOne(mappedBy = "mission")
+    private Report report;
 }

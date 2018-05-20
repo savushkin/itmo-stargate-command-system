@@ -72,7 +72,6 @@ CREATE  TABLE mission (
   date_departure DATE NOT NULL,
   command_departure BIGINT NOT NULL REFERENCES "command" (id),
   description TEXT NOT NULL,
-  who_last_edit BIGINT REFERENCES "user" (id),
   PRIMARY  KEY(id)
 );
 

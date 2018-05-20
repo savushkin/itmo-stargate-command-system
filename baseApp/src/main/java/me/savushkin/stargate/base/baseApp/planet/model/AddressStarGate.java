@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "address_star_gate")
 public class AddressStarGate {
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
@@ -24,9 +24,12 @@ public class AddressStarGate {
     @Column(name = "physical_name", nullable = false, length = 200)
     private String physical_name;
 
+    @OneToOne(mappedBy = "addressStarGate")
+    private Zone zone;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "address_shevrons",
-            joinColumns = { @JoinColumn(name = "addres_id") },
+            joinColumns = @JoinColumn(name = "addres_id"),
             inverseJoinColumns = { @JoinColumn(name = "shevron_id") })
     private Set<Shevron> shevrons = new HashSet<>();
 }

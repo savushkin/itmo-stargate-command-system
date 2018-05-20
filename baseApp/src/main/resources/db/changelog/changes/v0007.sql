@@ -1,8 +1,8 @@
-CREATE TABLE mission (
-  id BIGSERIAL NOT NULL,
-  zone_id BIGINT REFERENCES zone(id) NOT NULL,
-  command_id BIGINT REFERENCES command(id),
-  date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-  description VARCHAR(4096),
-  PRIMARY KEY (id)
-);
+-- CREATE TABLE mission (
+--   id BIGSERIAL NOT NULL,
+--   zone_id BIGINT REFERENCES zone(id) NOT NULL,
+--   command_id BIGINT REFERENCES command(id),
+--   date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+--   description VARCHAR(4096),
+--   PRIMARY KEY (id)
+-- );

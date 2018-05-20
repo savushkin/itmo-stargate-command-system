@@ -1,8 +1,12 @@
 package me.savushkin.stargate.base.baseApp.planet.model;
 
 import lombok.Data;
+import me.savushkin.stargate.base.baseApp.mission.model.Mission;
 
 import javax.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -12,7 +16,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class Zone {
 
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
@@ -20,14 +24,18 @@ public class Zone {
     private String name;
 
     @Column(name = "climatic_conditions")
-    private String climatic_conditions;
+    private String climaticConditions;
 
     @Column(name = "mititary_threats")
-    private String mititary_threats;
+    private String mititaryThreats;
 
     @Column(name = "minerals")
     private String minerals;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
     private AddressStarGate addressStarGate;
+
+    @OneToMany(mappedBy = "zone")
+    private Set<Mission> missions = new HashSet<>();
 }

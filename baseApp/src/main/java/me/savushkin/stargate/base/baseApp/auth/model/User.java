@@ -2,6 +2,7 @@ package me.savushkin.stargate.base.baseApp.auth.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import me.savushkin.stargate.base.baseApp.command.model.Command;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -15,7 +16,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
@@ -26,7 +27,7 @@ public class User {
     private String name;
 
     @Column(name = "second_name", nullable = true, length = 200)
-    private String second_name;
+    private String secondName;
 
     @Column(name = "surname", nullable = true, length = 200)
     private String surname;
@@ -41,10 +42,10 @@ public class User {
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
+    @ManyToOne
+    @JoinColumn(name = "command_id", nullable = true)
+    private Command command;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserRole> userRole = new HashSet<>(0);
-
-    @Column(name = "command_id", nullable = true)
-    private Long command;
-
 }

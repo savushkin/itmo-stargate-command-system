@@ -40,3 +40,8 @@ INSERT INTO user_role (user_id, role) VALUES
   (8, 'ROLE_USER');
 INSERT INTO user_role (user_id, role) VALUES
   (8, 'ROLE_ADMINISTRATOR');
+
+INSERT INTO "user" (username, password, enabled) VALUES
+  ('adm', '$2a$04$Z0s5s9dWwDLqeYuyplbAJem760d9e5gE.7xp.jQn6ANa7SCMb2Iaq', TRUE);
+INSERT INTO user_role (user_id, role) VALUES
+  (8, 'ROLE_USER');

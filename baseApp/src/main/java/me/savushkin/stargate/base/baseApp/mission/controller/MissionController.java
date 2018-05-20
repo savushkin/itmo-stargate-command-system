@@ -1,5 +1,6 @@
 package me.savushkin.stargate.base.baseApp.mission.controller;
 
+import me.savushkin.stargate.base.baseApp.auth.model.User;
 import me.savushkin.stargate.base.baseApp.command.repository.CommandRepository;
 import me.savushkin.stargate.base.baseApp.mission.model.Mission;
 import me.savushkin.stargate.base.baseApp.mission.repository.MissionRepository;
@@ -11,6 +12,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,16 +49,22 @@ public class MissionController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity create(
+            @RequestParam() String name,
             @RequestParam() String description,
-            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") Date date,
+            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") Date dateCreate,
+            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") Date dateDeparture,
             @RequestParam() Long zoneId,
             @RequestParam() Long commandId) {
         try {
             Mission mission = new Mission();
+            mission.setName(name);
             mission.setDescription(description);
-            mission.setDate(date);
+            mission.setDateCreate(dateCreate);
+            mission.setDateDeparture(dateDeparture);
             mission.setZone(zoneRepository.findOne(zoneId));
             mission.setCommand(commandRepository.findOne(commandId));
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User curUser = (User) auth.getDetails();
             return new ResponseEntity(missionRepository.save(mission), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

@@ -14,9 +14,9 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class UserRole {
 
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private Long id;
+    private Long ID;
 
     @JsonIgnore
     @Column(name = "user_id", unique = true, nullable = false)
@@ -24,5 +24,4 @@ public class UserRole {
 
     @Column(name = "role", nullable = false, length = 200)
     private String role;
-
 }
