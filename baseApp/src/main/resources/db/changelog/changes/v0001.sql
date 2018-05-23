@@ -44,6 +44,7 @@ CREATE TABLE shevron (
   id BIGSERIAL NOT NULL,
   name VARCHAR (300) NOT NULL,
   glyph numeric NOT NULL,
+  file_name VARCHAR (200),
   PRIMARY KEY (id)
 );
 

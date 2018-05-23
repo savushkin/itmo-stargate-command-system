@@ -1,5 +1,6 @@
 package me.savushkin.stargate.base.baseApp.planet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
 @Entity
-@Table(name = "address_star_gate")
+@Table(name = "shevron")
 public class Shevron {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,7 @@ public class Shevron {
     @Column(name = "glyph", nullable = false)
     private Integer glyph;
 
-    @ManyToMany(mappedBy = "shevrons")
-    private Set<AddressStarGate> addressStarGates = new HashSet<>();
+    @Column(name = "file_name")
+    private String fileName;
+
 }
