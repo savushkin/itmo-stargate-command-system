@@ -19,17 +19,39 @@ public class AddressStarGate {
     private Long id;
 
     @Column(name = "human_name", nullable = false, length = 200)
-    private String human_name;
+    private String humanName;
 
     @Column(name = "physical_name", nullable = false, length = 200)
-    private String physical_name;
+    private String physicalName;
 
     @OneToOne(mappedBy = "addressStarGate")
     private Zone zone;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "address_shevrons",
-            joinColumns = @JoinColumn(name = "addres_id"),
-            inverseJoinColumns = { @JoinColumn(name = "shevron_id") })
-    private Set<Shevron> shevrons = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "glyph1")
+    private Shevron Glyph1;
+
+    @ManyToOne
+    @JoinColumn(name = "glyph2")
+    private Shevron Glyph2;
+
+    @ManyToOne
+    @JoinColumn(name = "glyph3")
+    private Shevron Glyph3;
+
+    @ManyToOne
+    @JoinColumn(name = "glyph4")
+    private Shevron Glyph4;
+
+    @ManyToOne
+    @JoinColumn(name = "glyph5")
+    private Shevron Glyph5;
+
+    @ManyToOne
+    @JoinColumn(name = "glyph6")
+    private Shevron Glyph6;
+
+    @ManyToOne
+    @JoinColumn(name = "glyph7")
+    private Shevron Glyph7;
 }

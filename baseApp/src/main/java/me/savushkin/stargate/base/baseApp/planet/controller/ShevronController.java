@@ -1,12 +1,9 @@
 package me.savushkin.stargate.base.baseApp.planet.controller;
 
-import jdk.nashorn.internal.ir.RuntimeNode;
 import me.savushkin.stargate.base.baseApp.Services.StorageService;
 import me.savushkin.stargate.base.baseApp.planet.model.Shevron;
-import me.savushkin.stargate.base.baseApp.planet.model.Zone;
 import me.savushkin.stargate.base.baseApp.planet.repository.ShevronRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -90,7 +87,6 @@ public class ShevronController {
 
             storageService.uploadFile(shevronsUploadPath, file, fileName);
 
-            shevron.setFileName(fileName);
             shevronRepository.save(shevron);
 
             return new ResponseEntity( "Файл успешно сохранен", HttpStatus.OK);

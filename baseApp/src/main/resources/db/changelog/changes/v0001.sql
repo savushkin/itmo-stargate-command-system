@@ -33,25 +33,23 @@ CREATE TABLE user_role (
   PRIMARY KEY (id)
 );
 
+create table shevron(
+  id BIGSERIAL NOT NULL,
+  name VARCHAR (200) NOT NULL,
+  PRIMARY  KEY (id)
+);
+
 CREATE TABLE address_star_gate(
   id BIGSERIAL NOT NULL,
   human_name VARCHAR (200) NOT NULL,
   physical_name VARCHAR (200) not null,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE shevron (
-  id BIGSERIAL NOT NULL,
-  name VARCHAR (300) NOT NULL,
-  glyph numeric NOT NULL,
-  file_name VARCHAR (200),
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE address_shevrons(
-  id BIGSERIAL NOT NULL,
-  addres_id BIGINT NOT NULL REFERENCES "address_star_gate" (id),
-  shevron_id BIGINT NOT NULL REFERENCES "shevron" (id),
+  glyph1 BIGINT references "shevron"(id),
+  glyph2 BIGINT references "shevron"(id),
+  glyph3 BIGINT references "shevron"(id),
+  glyph4 BIGINT references "shevron"(id),
+  glyph5 BIGINT references "shevron"(id),
+  glyph6 BIGINT references "shevron"(id),
+  glyph7 BIGINT references "shevron"(id),
   PRIMARY KEY (id)
 );
 
