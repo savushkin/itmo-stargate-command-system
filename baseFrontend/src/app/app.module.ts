@@ -38,6 +38,7 @@ import {MissionListPageComponent} from "@sgc/_component/page/mission-list-page/m
 import {MissionCreatePageComponent} from "@sgc/_component/page/mission-create-page/mission-create-page.component";
 import {UserEditPageComponent} from "@sgc/_component/page/user-edit-page/user-edit-page.component";
 import {UserCreatePageComponent} from "@sgc/_component/page/user-create-page/user-create-page.component";
+import {UserFormComponent} from "@sgc/_component/user/user-form/user-form.component";
 
 
 @NgModule({
@@ -64,14 +65,16 @@ import {UserCreatePageComponent} from "@sgc/_component/page/user-create-page/use
     PageNotFoundComponent,
     LoginPageComponent,
     LogoutPageComponent,
-    UserCreatePageComponent,
-    UserEditPageComponent,
+
     UserListPageComponent,
     CommandListPageComponent,
     ZoneListPageComponent,
     MissionListPageComponent,
 
     MissionCreatePageComponent,
+    UserCreatePageComponent,
+
+    UserEditPageComponent,
 
     ListComponent,
     UserListComponent,
@@ -79,7 +82,8 @@ import {UserCreatePageComponent} from "@sgc/_component/page/user-create-page/use
     ZoneListComponent,
     MissionListComponent,
 
-    MissionCreateComponent
+    MissionCreateComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,

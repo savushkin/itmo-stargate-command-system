@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="save(form)">
+  <mat-form-field>
+    <input type="text" matInput placeholder="Номер" [(ngModel)]="item.id" formControlName="id" #id>
+    <mat-hint align="start" *ngIf="!id.value">Будет присвоен после создания</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Логин" [(ngModel)]="item.username" formControlName="username">
+    <mat-error>Это обязательное поле</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Имя" [(ngModel)]="item.name" formControlName="name">
+    <mat-error>Это обязательное поле</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Фамилия" [(ngModel)]="item.surname" formControlName="surname">
+    <mat-error>Это обязательное поле</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Звание" [(ngModel)]="item.rank" formControlName="rank">
+    <mat-error>Это обязательное поле</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="password" matInput placeholder="Пароль" [(ngModel)]="item.password" formControlName="password">
+    <mat-error>Это обязательное поле</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Роли" [multiple]="true" formGroupName="userRole" [(value)]="item.userRole">
+      <mat-option [value]="{role: 'ROLE_USER'}">ROLE_USER</mat-option>
+      <mat-option [value]="{role: 'ROLE_OPERATOR'}">ROLE_OPERATOR</mat-option>
+      <mat-option [value]="{role: 'ROLE_COMMANDER'}">ROLE_COMMANDER</mat-option>
+      <mat-option [value]="{role: 'ROLE_SG'}">ROLE_SG</mat-option>
+      <mat-option [value]="{role: 'ROLE_ARCHAEOLOGIST'}">ROLE_ARCHAEOLOGIST</mat-option>
+      <mat-option [value]="{role: 'ROLE_GEOLOGIST'}">ROLE_GEOLOGIST</mat-option>
+      <mat-option [value]="{role: 'ROLE_SCOUT'}">ROLE_SCOUT</mat-option>
+      <mat-option [value]="{role: 'ROLE_DIPLOMAT'}">ROLE_DIPLOMAT</mat-option>
+      <mat-option [value]="{role: 'ROLE_DRONE'}">ROLE_DRONE</mat-option>
+      <mat-option [value]="{role: 'ROLE_ADMINISTRATOR'}">ROLE_ADMINISTRATOR</mat-option>
+    </mat-select>
+    <mat-error>Это обязательное поле</mat-error>
+  </mat-form-field>
+
+  <button type="submit" mat-raised-button color="primary">
+    Сохранить
+  </button>
+</form>
