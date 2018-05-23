@@ -15,7 +15,7 @@ CREATE TABLE command (
 
 CREATE TABLE "user" (
   id BIGSERIAL NOT NULL,
-  username VARCHAR(45) NOT NULL,
+  username VARCHAR(45) UNIQUE NOT NULL,
   name VARCHAR (200) ,
   second_name VARCHAR (200),
   surname VARCHAR (200),
