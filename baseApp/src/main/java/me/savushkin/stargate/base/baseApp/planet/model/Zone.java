@@ -24,7 +24,7 @@ public class Zone {
     private String name;
 
     @Column(name = "climatic_conditions")
-    private String climaticConditions;
+        private String climaticConditions;
 
     @Column(name = "mititary_threats")
     private String mititaryThreats;
@@ -32,10 +32,10 @@ public class Zone {
     @Column(name = "minerals")
     private String minerals;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private AddressStarGate addressStarGate;
 
-    @OneToMany(mappedBy = "zone")
-    private Set<Mission> missions = new HashSet<>();
+//    @OneToMany(mappedBy = "zone")
+//    private Set<Mission> missions = new HashSet<>();
 }

@@ -1,5 +1,6 @@
 package me.savushkin.stargate.base.baseApp.planet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,9 +24,6 @@ public class AddressStarGate {
 
     @Column(name = "physical_name", nullable = false, length = 200)
     private String physicalName;
-
-    @OneToOne(mappedBy = "addressStarGate")
-    private Zone zone;
 
     @ManyToOne
     @JoinColumn(name = "glyph1")

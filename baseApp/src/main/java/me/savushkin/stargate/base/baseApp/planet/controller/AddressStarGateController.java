@@ -52,7 +52,7 @@ public class AddressStarGateController {
             @RequestBody() AddressStarGate address){
         try{
             AddressStarGate addressSaved = addressStarGateRepository.save(address);
-            return new ResponseEntity(addressSaved, HttpStatus.OK);
+            return new ResponseEntity(addressSaved, HttpStatus.CREATED);
         }
         catch(Exception e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
