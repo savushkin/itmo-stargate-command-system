@@ -8,9 +8,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.xml.ws.Response;
 
 @Controller
 @RequestMapping("/api/command-type")
@@ -32,5 +32,52 @@ public class CommandTypeController {
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    public ResponseEntity getCommandType(
+            @PathVariable("id") Long id
+    ){
+        try{
+            CommandType typeCommand = commandTypeRepository.findOne(id);
+            return new ResponseEntity(typeCommand, HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity((HttpStatus.BAD_REQUEST));
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity createCommandType(
+            @RequestBody() CommandType commandType){
+        try{
+            return saveCommandType(commandType);
+        }
+        catch(Exception e){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    public ResponseEntity updateCommandType(
+            @RequestBody() CommandType commandType
+    ){
+        try{
+            if(commandType.getId() == 0)
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+
+            return saveCommandType(commandType);
+        }
+        catch(Exception e){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    private ResponseEntity saveCommandType(CommandType commandType){
+        if( !commandType.getTypeName().isEmpty() ){
+            CommandType saved = commandTypeRepository.save(commandType);
+            return new ResponseEntity(saved, HttpStatus.CREATED);
+        }
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

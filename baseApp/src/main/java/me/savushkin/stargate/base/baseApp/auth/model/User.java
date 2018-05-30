@@ -1,6 +1,6 @@
 package me.savushkin.stargate.base.baseApp.auth.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import me.savushkin.stargate.base.baseApp.command.model.Command;
 
@@ -42,7 +42,7 @@ public class User {
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "command_id", nullable = true)
     private Command command;
 

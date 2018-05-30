@@ -32,10 +32,7 @@ public class Zone {
     @Column(name = "minerals")
     private String minerals;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
     private AddressStarGate addressStarGate;
-
-//    @OneToMany(mappedBy = "zone")
-//    private Set<Mission> missions = new HashSet<>();
 }

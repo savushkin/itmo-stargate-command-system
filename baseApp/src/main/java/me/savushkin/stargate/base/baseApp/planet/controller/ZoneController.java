@@ -4,6 +4,7 @@ import me.savushkin.stargate.base.baseApp.command.model.Command;
 import me.savushkin.stargate.base.baseApp.command.repository.CommandRepository;
 import me.savushkin.stargate.base.baseApp.planet.model.AddressStarGate;
 import me.savushkin.stargate.base.baseApp.planet.model.Zone;
+import me.savushkin.stargate.base.baseApp.planet.repository.AddressStarGateRepository;
 import me.savushkin.stargate.base.baseApp.planet.repository.ZoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,10 +22,13 @@ import java.util.List;
 @RequestMapping("/api/zone")
 public class ZoneController {
     private final ZoneRepository zoneRepository;
+    private final AddressStarGateRepository addressStarGateRepository;
 
     @Autowired
-    public ZoneController(ZoneRepository zoneRepository) {
+    public ZoneController(ZoneRepository zoneRepository,
+                          AddressStarGateRepository addressStarGateRepository) {
         this.zoneRepository = zoneRepository;
+        this.addressStarGateRepository = addressStarGateRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -68,7 +72,8 @@ public class ZoneController {
         try{
             if(zone.getAddressStarGate() == null)
                 return new ResponseEntity("Прикрепление Зоны к адресу Звездных врат обязательно!", HttpStatus.NO_CONTENT);
-
+            Long address_id = zone.getAddressStarGate().getId();
+            zone.setAddressStarGate(addressStarGateRepository.findOne(address_id));
             Zone zoneSaved = zoneRepository.save(zone);
 
             return new ResponseEntity(zoneRepository.findOne(zoneSaved.getId()), HttpStatus.CREATED);

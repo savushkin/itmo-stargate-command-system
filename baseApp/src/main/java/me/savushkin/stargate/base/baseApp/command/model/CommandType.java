@@ -1,5 +1,7 @@
 package me.savushkin.stargate.base.baseApp.command.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,6 +26,7 @@ public class CommandType {
     @Column(name = "description")
     private String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "commandType")
-    private Set<Command> commands = new HashSet<Command>();
+    private Set<Command> commands = new HashSet<>();
 }

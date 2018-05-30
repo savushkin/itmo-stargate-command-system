@@ -9,7 +9,7 @@ CREATE TABLE command (
   id BIGSERIAL NOT NULL,
   name VARCHAR (200) NOT NULL,
   type_id BIGINT NOT NULL REFERENCES "command_type" (id),
-  description TEXT NOT NULL,
+  description TEXT,
   primary key(id)
 );
 

@@ -35,8 +35,8 @@ public class AuthController {
     public ResponseEntity<?> login(
             @RequestParam("username") String username,
             @RequestParam("password") String password) {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         try {
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
             Authentication auth = authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
         } catch (BadCredentialsException e) {

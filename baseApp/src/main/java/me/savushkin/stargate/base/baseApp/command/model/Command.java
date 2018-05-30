@@ -1,15 +1,15 @@
 package me.savushkin.stargate.base.baseApp.command.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import me.savushkin.stargate.base.baseApp.auth.model.User;
 import me.savushkin.stargate.base.baseApp.mission.model.Mission;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.MissingFormatArgumentException;
 import java.util.Set;
-
-import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
 @Entity
@@ -25,14 +25,15 @@ public class Command {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "type_id", nullable = false)
     private CommandType commandType;
 
     @Column(name = "description")
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "command", cascade = CascadeType.ALL)
-    private Set<User> members = new HashSet<User>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "command", fetch = FetchType.LAZY)
+    private Set<User> members = new HashSet<>();
 
     @OneToMany(mappedBy = "command")
     private Set<Mission> missions = new HashSet<>();
