@@ -91,7 +91,7 @@ export class UserFormComponent implements OnInit {
       } else {
         this.userService.createOne(this.item).subscribe(
           item => {
-            console.log(item);
+            this.router.navigate(['../'], {relativeTo: this.route})
           },
           error => {
 

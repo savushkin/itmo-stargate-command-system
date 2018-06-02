@@ -4,10 +4,29 @@
     <mat-hint align="start" *ngIf="!id.value">Будет присвоен после создания</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input type="text" matInput placeholder="Логин" [(ngModel)]="item.username" formControlName="username">
+    <input type="text" matInput placeholder="Название" [(ngModel)]="item.name" formControlName="name">
     <mat-error>Это обязательное поле</mat-error>
   </mat-form-field>
   <mat-form-field>
+    <mat-select placeholder="Тип команды" [multiple]="false" formGroupName="commandType" [(value)]="item.commandType.id">
+      <mat-option [value]="1">Археологи</mat-option>
+      <mat-option [value]="2">Разведывательный отряд</mat-option>
+      <mat-option [value]="3">Дипломат</mat-option>
+      <mat-option [value]="4">Команда поддержки</mat-option>
+    </mat-select>
+    <mat-error>Это обязательное поле</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Члены" [multiple]="true" formGroupName="members" [(value)]="item.members">
+      <mat-option *ngFor="let user of avalibleUsers | async" [value]="user.id">{{user?.rank}} {{user?.name}} {{user?.surname}} ({{user?.username}})</mat-option>
+    </mat-select>
+    <mat-error>Это обязательное поле</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput mat-autosize placeholder="Описание" formGroupName="description" [(value)]="item.description"></textarea>
+  </mat-form-field>
+
+  <!--<mat-form-field>
     <input type="text" matInput placeholder="Имя" [(ngModel)]="item.name" formControlName="name">
     <mat-error>Это обязательное поле</mat-error>
   </mat-form-field>
@@ -23,21 +42,7 @@
     <input type="password" matInput placeholder="Пароль" [(ngModel)]="item.password" formControlName="password">
     <mat-error>Это обязательное поле</mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <mat-select placeholder="Роли" [multiple]="true" formGroupName="userRole" [(value)]="item.userRole">
-      <mat-option [value]="'ROLE_USER'">{{'ROLE_USER'|userRole}}</mat-option>
-      <mat-option [value]="'ROLE_OPERATOR'">{{'ROLE_OPERATOR'|userRole}}</mat-option>
-      <mat-option [value]="'ROLE_COMMANDER'">{{'ROLE_COMMANDER'|userRole}}</mat-option>
-      <mat-option [value]="'ROLE_SG'">{{'ROLE_SG'|userRole}}</mat-option>
-      <mat-option [value]="'ROLE_ARCHAEOLOGIST'">{{'ROLE_ARCHAEOLOGIST'|userRole}}</mat-option>
-      <mat-option [value]="'ROLE_GEOLOGIST'">{{'ROLE_GEOLOGIST'|userRole}}</mat-option>
-      <mat-option [value]="'ROLE_SCOUT'">{{'ROLE_SCOUT'|userRole}}</mat-option>
-      <mat-option [value]="'ROLE_DIPLOMAT'">{{'ROLE_DIPLOMAT'|userRole}}</mat-option>
-      <mat-option [value]="'ROLE_DRONE'">{{'ROLE_DRONE'|userRole}}</mat-option>
-      <mat-option [value]="'ROLE_ADMINISTRATOR'">{{'ROLE_ADMINISTRATOR'|userRole}}</mat-option>
-    </mat-select>
-    <mat-error>Это обязательное поле</mat-error>
-  </mat-form-field>
+ -->
 
   <button type="submit" mat-raised-button color="primary">
     Сохранить

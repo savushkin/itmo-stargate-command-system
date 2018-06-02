@@ -20,6 +20,17 @@ export class UserService {
     );
   }
 
+  getAllForCommand(command_id): Observable<User[]> {
+
+    let params: HttpParams = new HttpParams();
+      if (command_id)
+        params = params.append('id', `${command_id}`);
+    return this.http.get<User[]>(
+      `/${environment.context}/${environment.api.user}/for-command`,
+      { params }
+    );
+  }
+
   getOne(id: number): Observable<User> {
     const params: HttpParams = new HttpParams();
     return this.http.get<User>(

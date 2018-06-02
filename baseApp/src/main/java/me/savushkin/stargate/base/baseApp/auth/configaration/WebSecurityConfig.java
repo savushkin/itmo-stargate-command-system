@@ -3,7 +3,6 @@ package me.savushkin.stargate.base.baseApp.auth.configaration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,7 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public final static String ROLE_ADMIN = "ADMINISTRATOR";
     public final static String ROLE_USER = "USER";
     public final static String ROLE_COMMANDER = "COMMANDER";
-    public final static String ROLE_SG = "ROLE_SG";
+    public final static String ROLE_SG = "SG";
 
     private final UserDetailsService userDetailsService;
 

@@ -34,7 +34,7 @@
     <mat-cell *matCellDef="let row">
       <ul class="unstyle-list">
         <li *ngFor="let role of row.userRole">
-          {{role.role}}
+          {{role.role|userRole}}
         </li>
       </ul>
     </mat-cell>
@@ -42,7 +42,7 @@
   <ng-container matColumnDef="command">
     <mat-header-cell *matHeaderCellDef> Комманда </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      {{row?.command}}
+      {{row?.command|command}}
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="icon-edit">

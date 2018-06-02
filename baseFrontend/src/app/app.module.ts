@@ -40,6 +40,12 @@ import {UserEditPageComponent} from "@sgc/_component/page/user-edit-page/user-ed
 import {UserCreatePageComponent} from "@sgc/_component/page/user-create-page/user-create-page.component";
 import {UserFormComponent} from "@sgc/_component/user/user-form/user-form.component";
 import {UserResolver} from "@sgc/_service/user/user.resolver";
+import {UserRolePipe} from './_pipe/user-role.pipe';
+import {CommandPipe} from './_pipe/command.pipe';
+import {CommandCreatePageComponent} from "@sgc/_component/page/command-create-page/command-create-page.component";
+import {CommandEditPageComponent} from "@sgc/_component/page/command-edit-page/command-edit-page.component";
+import {CommandFormComponent} from "@sgc/_component/command/command-form/command-form.component";
+import {CommandResolver} from "@sgc/_service/command/command.resolver";
 
 
 @NgModule({
@@ -72,10 +78,12 @@ import {UserResolver} from "@sgc/_service/user/user.resolver";
     ZoneListPageComponent,
     MissionListPageComponent,
 
-    MissionCreatePageComponent,
     UserCreatePageComponent,
+    CommandCreatePageComponent,
+    MissionCreatePageComponent,
 
     UserEditPageComponent,
+    CommandEditPageComponent,
 
     ListComponent,
     UserListComponent,
@@ -84,7 +92,11 @@ import {UserResolver} from "@sgc/_service/user/user.resolver";
     MissionListComponent,
 
     MissionCreateComponent,
-    UserFormComponent
+    UserFormComponent,
+    CommandFormComponent,
+
+    UserRolePipe,
+    CommandPipe
   ],
   imports: [
     BrowserModule,
@@ -111,6 +123,7 @@ import {UserResolver} from "@sgc/_service/user/user.resolver";
     UserResolver,
     UserListService,
     CommandService,
+    CommandResolver,
     CommandListService,
     ZoneService,
     ZoneListService,

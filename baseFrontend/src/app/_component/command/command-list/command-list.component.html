@@ -2,19 +2,56 @@
   <ng-container matColumnDef="number">
     <mat-header-cell *matHeaderCellDef> Номер </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <button mat-raised-button color="primary" [routerLink]="['/command', row.id]">
-        {{row.id}}
-      </button>
+      {{row.id}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Название </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row?.name}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef> Тип </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row?.commandType?.typeName}}
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="members">
     <mat-header-cell *matHeaderCellDef> Участники </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <ul>
+      <ul class="unstyle-list">
         <li *ngFor="let member of row.members">
-          {{member.username}}
+          {{member?.rank}} {{member?.name}} {{member?.surname}} ({{member?.username}})
         </li>
       </ul>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Описание </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row?.description}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="icon-edit">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" routerLink="/command/create">
+        <mat-icon>add_box</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button color="primary" [routerLink]="['/command', row.id]">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="icon-delete">
+    <mat-header-cell *matHeaderCellDef>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button color="warn" (click)="delete(row)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="columns"></mat-header-row>

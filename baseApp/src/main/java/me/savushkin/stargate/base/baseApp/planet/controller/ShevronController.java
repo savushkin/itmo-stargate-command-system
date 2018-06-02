@@ -76,7 +76,7 @@ public class ShevronController {
             Shevron shevron = shevronRepository.findOne(id);
 
             if(file.isEmpty())
-                return new ResponseEntity(HttpStatus.NO_CONTENT);
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
             String fileName = file.getOriginalFilename();
             fileName = fileName.substring(fileName.lastIndexOf("."));

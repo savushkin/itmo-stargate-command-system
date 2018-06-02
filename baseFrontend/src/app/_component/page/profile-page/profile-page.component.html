@@ -5,9 +5,9 @@
     </mat-card-title>
     <mat-card-content class="">
       РОЛИ:
-      <ul>
+      <ul class="unstyle-list">
         <li *ngFor="let role of user.userRole">
-          {{role.role}}
+          {{role.role|userRole}}
         </li>
       </ul>
     </mat-card-content>

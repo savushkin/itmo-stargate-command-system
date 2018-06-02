@@ -5,7 +5,6 @@ import me.savushkin.stargate.base.baseApp.auth.repository.UserRepository;
 import me.savushkin.stargate.base.baseApp.command.model.Command;
 import me.savushkin.stargate.base.baseApp.command.repository.CommandRepository;
 import me.savushkin.stargate.base.baseApp.command.repository.CommandTypeRepository;
-import me.savushkin.stargate.base.baseApp.planet.model.Zone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.List;
 import java.util.Set;
 
@@ -78,7 +76,7 @@ public class CommandController {
             if(command.getMembers() == null ||
                 command.getMembers() != null &&
                     command.getMembers().size() == 0)
-                return new ResponseEntity(HttpStatus.NO_CONTENT);
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
             Set<User> usersCommand = command.getMembers();
             Command saved = commandRepository.save(command);
@@ -96,15 +94,16 @@ public class CommandController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
     public ResponseEntity updateCommand(
-            @RequestBody() Command command
+            @RequestBody() Command command,
+            @PathVariable Long id
     ){
         try{
             if(command.getMembers() == null ||
                     command.getMembers() != null &&
                             command.getMembers().size() == 0)
-                return new ResponseEntity(HttpStatus.NO_CONTENT);
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
             List<User> oldUsersCommand = userRepository.findUserByCommand(command.getId());
 

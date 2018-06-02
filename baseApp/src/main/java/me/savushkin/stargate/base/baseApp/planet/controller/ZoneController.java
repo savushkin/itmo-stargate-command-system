@@ -1,8 +1,5 @@
 package me.savushkin.stargate.base.baseApp.planet.controller;
 
-import me.savushkin.stargate.base.baseApp.command.model.Command;
-import me.savushkin.stargate.base.baseApp.command.repository.CommandRepository;
-import me.savushkin.stargate.base.baseApp.planet.model.AddressStarGate;
 import me.savushkin.stargate.base.baseApp.planet.model.Zone;
 import me.savushkin.stargate.base.baseApp.planet.repository.AddressStarGateRepository;
 import me.savushkin.stargate.base.baseApp.planet.repository.ZoneRepository;
@@ -14,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.xml.ws.Response;
 import java.util.List;
 
 @Controller
@@ -71,7 +66,7 @@ public class ZoneController {
             @RequestBody() Zone zone){
         try{
             if(zone.getAddressStarGate() == null)
-                return new ResponseEntity("Прикрепление Зоны к адресу Звездных врат обязательно!", HttpStatus.NO_CONTENT);
+                return new ResponseEntity("Прикрепление Зоны к адресу Звездных врат обязательно!", HttpStatus.BAD_REQUEST);
             Long address_id = zone.getAddressStarGate().getId();
             zone.setAddressStarGate(addressStarGateRepository.findOne(address_id));
             Zone zoneSaved = zoneRepository.save(zone);
@@ -100,7 +95,7 @@ public class ZoneController {
             @RequestBody() Zone zone){
         try{
             if (zone.getAddressStarGate() == null)
-                return new ResponseEntity("Прикрепление Зоны к адресу Звездных врат обязательно!", HttpStatus.NO_CONTENT);
+                return new ResponseEntity("Прикрепление Зоны к адресу Звездных врат обязательно!", HttpStatus.BAD_REQUEST);
 
             Zone zoneSaved = zoneRepository.save(zone);
 

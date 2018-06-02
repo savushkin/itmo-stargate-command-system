@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
-
 @Controller
 @RequestMapping("/api/command-type")
 public class CommandTypeController {
@@ -78,6 +76,6 @@ public class CommandTypeController {
             CommandType saved = commandTypeRepository.save(commandType);
             return new ResponseEntity(saved, HttpStatus.CREATED);
         }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

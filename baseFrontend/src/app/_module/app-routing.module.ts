@@ -11,6 +11,9 @@ import {MissionCreatePageComponent} from "@sgc/_component/page/mission-create-pa
 import {UserCreatePageComponent} from "@sgc/_component/page/user-create-page/user-create-page.component";
 import {UserEditPageComponent} from "@sgc/_component/page/user-edit-page/user-edit-page.component";
 import {UserResolver} from "@sgc/_service/user/user.resolver";
+import {CommandCreatePageComponent} from "@sgc/_component/page/command-create-page/command-create-page.component";
+import {CommandResolver} from "@sgc/_service/command/command.resolver";
+import {CommandEditPageComponent} from "@sgc/_component/page/command-edit-page/command-edit-page.component";
 
 const routes: Routes = [
   {
@@ -44,14 +47,27 @@ const routes: Routes = [
         },
         component: UserEditPageComponent
       }
-
     ]
   },
   {
     path: 'command',
-    component: CommandListPageComponent,
     children: [
-
+      {
+        path: '',
+        pathMatch: 'full',
+        component: CommandListPageComponent,
+      },
+      {
+        path: 'create',
+        component: CommandCreatePageComponent
+      },
+      {
+        path: ':id',
+        resolve: {
+          command : CommandResolver
+        },
+        component: CommandEditPageComponent
+      }
     ]
   },
   {
