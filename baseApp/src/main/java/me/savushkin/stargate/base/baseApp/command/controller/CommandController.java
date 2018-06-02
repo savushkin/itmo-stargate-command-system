@@ -84,7 +84,7 @@ public class CommandController {
 
             usersCommand.forEach(user -> {
                 User userToSave = userRepository.findOne(user.getId());
-                userToSave.setCommand(saved);
+                userToSave.setCommand(saved.getId());
                 userRepository.save(userToSave);
             });
 

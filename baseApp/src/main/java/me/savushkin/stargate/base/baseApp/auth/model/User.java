@@ -42,9 +42,11 @@ public class User {
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "command_id", nullable = true)
-    private Command command;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "command_id", nullable = true)
+//    private Command command;
+    @Column(name = "command_id")
+    private Long command;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserRole> userRole = new HashSet<>(0);

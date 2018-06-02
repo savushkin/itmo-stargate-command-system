@@ -31,7 +31,7 @@ public class Command {
     @Column(name = "description")
     private String description;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "command", fetch = FetchType.LAZY)
     private Set<User> members = new HashSet<>();
 
