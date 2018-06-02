@@ -1,5 +1,6 @@
 package me.savushkin.stargate.base.baseApp.auth.controller;
 
+import me.savushkin.stargate.base.baseApp.auth.configaration.WebSecurityConfig;
 import me.savushkin.stargate.base.baseApp.auth.model.User;
 import me.savushkin.stargate.base.baseApp.auth.model.UserRole;
 import me.savushkin.stargate.base.baseApp.auth.repository.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -52,6 +54,16 @@ public class UserController {
         try {
             User user = userRepository.findOne(id);
             return new ResponseEntity(user, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/forCommand")
+    public ResponseEntity getUsersForCommand() {
+        try {
+            List<User> users = userRepository.findUsersForAddToCommand(WebSecurityConfig.ROLE_SG);
+            return new ResponseEntity(users, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }

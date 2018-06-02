@@ -13,10 +13,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
-class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final static String ROLE_ADMIN = "ADMINISTRATOR";
-    private final static String ROLE_USER = "USER";
-    private final static String ROLE_COMMANDER = "COMMANDER";
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    public final static String ROLE_ADMIN = "ADMINISTRATOR";
+    public final static String ROLE_USER = "USER";
+    public final static String ROLE_COMMANDER = "COMMANDER";
+    public final static String ROLE_SG = "ROLE_SG";
 
     private final UserDetailsService userDetailsService;
 

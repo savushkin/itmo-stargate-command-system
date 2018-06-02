@@ -62,7 +62,7 @@ public class ReportController {
     ) {
         try {
             if(!modelIsValid(report))
-                return new ResponseEntity(HttpStatus.NO_CONTENT);
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
             Report saved = reportRepository.save(report);
             return new ResponseEntity(saved, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class ReportController {
         try{
             if(report.getId() <= 0 ||
                 !modelIsValid(report))
-                return new ResponseEntity(HttpStatus.NO_CONTENT);
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
             Report saved = reportRepository.save(report);
             return new ResponseEntity(saved, HttpStatus.OK);
@@ -93,7 +93,7 @@ public class ReportController {
     ){
         try{
             if(id <= 0)
-                return new ResponseEntity(HttpStatus.NO_CONTENT);
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
             reportRepository.delete(id);
             return new ResponseEntity(HttpStatus.OK);
         }
