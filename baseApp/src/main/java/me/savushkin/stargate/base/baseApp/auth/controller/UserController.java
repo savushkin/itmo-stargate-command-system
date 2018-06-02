@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Set;
 
@@ -59,10 +60,18 @@ public class UserController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/forCommand")
-    public ResponseEntity getUsersForCommand() {
+    @RequestMapping(method = RequestMethod.POST, path = "/forCommand")
+    public ResponseEntity getUsersForCommand(
+            @RequestParam() @Null Long id
+    ) {
         try {
-            List<User> users = userRepository.findUsersForAddToCommand(WebSecurityConfig.ROLE_SG);
+            List<User> users;
+            if(id == null){
+                users = userRepository.findUsersForAddToCommand(WebSecurityConfig.ROLE_SG);
+            }
+            else{
+                users = userRepository.findUsersForAddToCommand(WebSecurityConfig.ROLE_SG, id);
+            }
             return new ResponseEntity(users, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
