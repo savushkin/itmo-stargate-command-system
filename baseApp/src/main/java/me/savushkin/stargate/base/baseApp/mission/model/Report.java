@@ -1,5 +1,6 @@
 package me.savushkin.stargate.base.baseApp.mission.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import me.savushkin.stargate.base.baseApp.auth.model.User;
 
@@ -19,13 +20,14 @@ public class Report {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "mission_id", nullable = false)
+    @JsonIgnore
     private Mission mission;
 
-    @JoinColumn(name = "description", nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @JoinColumn(name = "report_date", nullable = false)
+    @Column(name = "report_date", nullable = false)
     private Date reportDate;
 }

@@ -31,10 +31,10 @@ public class Command {
     @Column(name = "description")
     private String description;
 
-
     @OneToMany(mappedBy = "command", fetch = FetchType.LAZY)
     private Set<User> members = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "command")
     private Set<Mission> missions = new HashSet<>();
 }

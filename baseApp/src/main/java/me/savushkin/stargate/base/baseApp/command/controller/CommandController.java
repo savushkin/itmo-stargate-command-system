@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 import java.util.Set;
 
@@ -77,6 +78,32 @@ public class CommandController {
             if(command.getMembers() == null ||
                 command.getMembers() != null &&
                     command.getMembers().size() == 0)
+                return new ResponseEntity(HttpStatus.NO_CONTENT);
+
+            Set<User> usersCommand = command.getMembers();
+            Command saved = commandRepository.save(command);
+
+            usersCommand.forEach(user -> {
+                User userToSave = userRepository.findOne(user.getId());
+                userToSave.setCommand(saved.getId());
+                userRepository.save(userToSave);
+            });
+
+            return new ResponseEntity(commandRepository.findOne(saved.getId()), HttpStatus.CREATED);
+        }
+        catch(Exception e){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity updateCommand(
+            @RequestBody() Command command
+    ){
+        try{
+            if(command.getMembers() == null ||
+                    command.getMembers() != null &&
+                            command.getMembers().size() == 0)
                 return new ResponseEntity(HttpStatus.NO_CONTENT);
 
             Set<User> usersCommand = command.getMembers();

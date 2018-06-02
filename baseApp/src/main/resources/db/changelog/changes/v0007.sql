@@ -1,8 +1,2 @@
--- CREATE TABLE mission (
---   id BIGSERIAL NOT NULL,
---   zone_id BIGINT REFERENCES zone(id) NOT NULL,
---   command_id BIGINT REFERENCES command(id),
---   date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
---   description VARCHAR(4096),
---   PRIMARY KEY (id)
--- );
+insert  into mission(id, name, zone_to_id, date_create, date_departure, command_departure)
+  values (1, 'Развездка в ABYDOS', 1, '2017-09-01 16:00:00.000000', '2017-09-01 16:00:00.000000', 1);

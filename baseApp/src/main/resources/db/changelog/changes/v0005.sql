@@ -9,12 +9,10 @@ insert into command_type (id, name, description)
 
 insert into command_type (id, name, description)
     values (4, 'Команда поддержки', 'Команда быстрого реагирования для поддержки других команд в Зонах в случае угрозу их уничтожения');
---
--- INSERT INTO command (command_type_id) VALUES
---   (1);
---
--- UPDATE "user" SET command_id = 1 WHERE id=3;
--- UPDATE "user" SET command_id = 1 WHERE id=4;
--- UPDATE "user" SET command_id = 1 WHERE id=5;
--- UPDATE "user" SET command_id = 1 WHERE id=6;
 
+insert  into command (id, name, type_id, description)
+    values(1, 'SG-1', 2, 'Главная разведка');
+
+update  "user"
+  set command_id = 1
+where id = 1 or id = 5;

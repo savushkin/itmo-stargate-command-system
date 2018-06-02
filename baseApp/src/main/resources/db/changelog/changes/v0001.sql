@@ -67,10 +67,10 @@ CREATE  TABLE mission (
   id BIGSERIAL NOT NULL,
   name varchar (200) NOT NULL ,
   zone_to_id BIGINT NOT NULL REFERENCES "zone" (id),
-  date_create DATE NOT NULL,
-  date_departure DATE NOT NULL,
+  date_create TIMESTAMP NOT NULL,
+  date_departure TIMESTAMP NOT NULL,
   command_departure BIGINT NOT NULL REFERENCES "command" (id),
-  description TEXT NOT NULL,
+  description TEXT,
   PRIMARY  KEY(id)
 );
 

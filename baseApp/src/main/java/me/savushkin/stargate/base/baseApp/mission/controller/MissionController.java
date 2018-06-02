@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,9 @@ public class MissionController {
     private final CommandRepository commandRepository;
 
     @Autowired
-    public MissionController(MissionRepository missionRepository, ZoneRepository zoneRepository, CommandRepository commandRepository) {
+    public MissionController(MissionRepository missionRepository,
+                             ZoneRepository zoneRepository,
+                             CommandRepository commandRepository) {
         this.missionRepository = missionRepository;
         this.zoneRepository = zoneRepository;
         this.commandRepository = commandRepository;
@@ -51,8 +54,8 @@ public class MissionController {
     public ResponseEntity create(
             @RequestParam() String name,
             @RequestParam() String description,
-            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") Date dateCreate,
-            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") Date dateDeparture,
+            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateCreate,
+            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateDeparture,
             @RequestParam() Long zoneId,
             @RequestParam() Long commandId) {
         try {
@@ -63,11 +66,37 @@ public class MissionController {
             mission.setDateDeparture(dateDeparture);
             mission.setZone(zoneRepository.findOne(zoneId));
             mission.setCommand(commandRepository.findOne(commandId));
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User curUser = (User) auth.getDetails();
+
             return new ResponseEntity(missionRepository.save(mission), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    public ResponseEntity update(
+            @RequestParam() String name,
+            @RequestParam() String description,
+            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateCreate,
+            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateDeparture,
+            @RequestParam() Long zoneId,
+            @RequestParam() Long commandId,
+            @PathVariable() Long id) {
+        try {
+            Mission mission = missionRepository.findOne(id);
+
+            mission.setName(name);
+            mission.setDescription(description);
+            mission.setDateCreate(dateCreate);
+            mission.setDateDeparture(dateDeparture);
+            mission.setZone(zoneRepository.findOne(zoneId));
+            mission.setCommand(commandRepository.findOne(commandId));
+
+            return new ResponseEntity(missionRepository.save(mission), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 }

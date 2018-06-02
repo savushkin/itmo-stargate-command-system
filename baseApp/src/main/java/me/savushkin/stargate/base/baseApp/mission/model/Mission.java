@@ -8,6 +8,8 @@ import me.savushkin.stargate.base.baseApp.planet.model.Zone;
 import javax.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 import static javax.persistence.GenerationType.TABLE;
@@ -42,6 +44,6 @@ public class Mission {
     @JoinColumn(name = "command_departure")
     private Command command;
 
-    @OneToOne(mappedBy = "mission")
-    private Report report;
+    @OneToMany(mappedBy = "mission", fetch = FetchType.LAZY)
+    private Set<Report> report = new HashSet<>();
 }
