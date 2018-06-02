@@ -9,6 +9,7 @@ import me.savushkin.stargate.base.baseApp.command.repository.CommandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Set;
 
@@ -60,9 +62,9 @@ public class UserController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/forCommand")
+    @RequestMapping(method = RequestMethod.GET, path = "/forCommand")
     public ResponseEntity getUsersForCommand(
-            @RequestParam() @Null Long id
+            @RequestParam(required = false) Long id
     ) {
         try {
             List<User> users;
