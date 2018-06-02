@@ -63,6 +63,7 @@ CREATE TABLE zone (
   PRIMARY KEY (id)
 );
 
+
 CREATE  TABLE mission (
   id BIGSERIAL NOT NULL,
   name varchar (200) NOT NULL ,
@@ -71,8 +72,8 @@ CREATE  TABLE mission (
   date_departure TIMESTAMP,
   command_departure BIGINT NOT NULL REFERENCES "command" (id),
   description TEXT,
-  approved BIT not null,
-  cancel BIT not null,
+  approved boolean not null,
+  cancel boolean not null,
   PRIMARY  KEY(id)
 );
 

@@ -50,6 +50,6 @@ public class Mission {
     @JoinColumn(name = "command_departure")
     private Command command;
 
-    @OneToMany(mappedBy = "report", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "mission", fetch = FetchType.LAZY)
     private Set<Report> mission  = new HashSet<>();
 }
