@@ -15,8 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -86,41 +84,38 @@ public class UserController {
         }
     }
 
-//    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-//    public ResponseEntity update(
-//            @PathVariable @NotNull Long id,
-//            @RequestBody() User userData){
-//        try {
-//            User user = userRepository.findOne(id);
-//            if(user == null)
-//                return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//
-//            user.setUsername(username);
-//            user.setName(name);
-//            user.setSecondName(secondName);
-//            user.setSurname(surname);
-//            user.setRank(rank);
-//            user.setEnabled(isEnabled);
-//            //TODO:раскомментировать, когда появятся команды
-////            newUser.setCommand(commandRepository.findOne(commandId));
-//
-//            user = userRepository.save(user);
-//
-//            List<UserRole> roles = userRoleRepository.findByUser(user.getId());
-//
-//            userRoleRepository.delete(roles);
-//
-//            for (String s:
-//                    userRoles) {
-//                UserRole role = new UserRole();
-//                role.setRole(s);
-//                role.setUser(user.getId());
-//                userRoleRepository.save(role);
-//            }
-//
-//            return new ResponseEntity(userRepository.findOne(user.getId()), HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//        }
-//    }
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    public ResponseEntity update(
+            @PathVariable @NotNull Long id,
+            @RequestBody() User userData){
+        try {
+            User user = userRepository.findOne(id);
+            if(user == null)
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+
+            user.setPassword(DEFAULT_PASS);
+
+            user.setEnabled(userData.isEnabled());
+            user.setName(userData.getName());
+            user.setRank(userData.getRank());
+            user.setSecondName(userData.getSecondName());
+            user.setSurname(userData.getSurname());
+            user.setUsername(userData.getUsername());
+            user.setCommand(userData.getCommand());
+
+            Set<UserRole> roles = userData.getUserRole();
+            userData.setUserRole(null);
+            User savedUser = userRepository.save(user);
+            roles.forEach(role -> {
+                userRoleRepository.deleteAllByUser(savedUser.getId());
+                role.setUser(savedUser.getId());
+            });
+            userRoleRepository.save(roles);
+
+            return new ResponseEntity(userRepository.findOne(user.getId()), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

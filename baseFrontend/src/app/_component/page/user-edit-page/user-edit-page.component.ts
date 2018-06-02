@@ -3,6 +3,7 @@ import {PageHeightService} from "@sgc/_service/page/page-height.service";
 import {PageComponent} from "@sgc/_component/page/page/page.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "@sgc/_service/user/auth.service";
+import {User} from "@sgc/_model/user";
 
 @Component({
   selector: 'sgc-user-edit-page',
@@ -11,6 +12,7 @@ import {AuthService} from "@sgc/_service/user/auth.service";
 })
 export class UserEditPageComponent extends PageComponent implements OnInit {
 
+  public user: User = null;
   constructor(
     route: ActivatedRoute,
     router: Router,
@@ -21,6 +23,14 @@ export class UserEditPageComponent extends PageComponent implements OnInit {
 
   ngOnInit() {
     super.ngOnInit();
+    this.route.data.subscribe(
+      data => {
+        if (data['user'])
+          this.user = data['user'];
+        else
+          this.user = null;
+      }
+    )
   }
 
 }
