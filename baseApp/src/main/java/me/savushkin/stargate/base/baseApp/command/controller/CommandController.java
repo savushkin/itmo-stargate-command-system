@@ -106,6 +106,13 @@ public class CommandController {
                             command.getMembers().size() == 0)
                 return new ResponseEntity(HttpStatus.NO_CONTENT);
 
+            List<User> oldUsersCommand = userRepository.findUserByCommand(command.getId());
+
+            oldUsersCommand.forEach(user -> {
+                user.setCommand(null);
+                userRepository.save(user);
+            });
+
             Set<User> usersCommand = command.getMembers();
             Command saved = commandRepository.save(command);
 

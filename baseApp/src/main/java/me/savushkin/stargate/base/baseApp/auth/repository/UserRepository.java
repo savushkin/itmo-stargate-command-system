@@ -14,6 +14,9 @@ import java.util.List;
 
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     User findByUsername(String username);
+
+    List<User> findUserByCommand(Long command_id);
+
     @Query(value = "select u.* from user_role inner join \"user\" u on user_role.user_id = u.id where user_role.role = :userRole and (command_id = :command or command_id is null)", nativeQuery = true)
     List<User> findUsersForAddToCommand(@Param("userRole") String userRole,
                                         @Param("command") @Null Long command);

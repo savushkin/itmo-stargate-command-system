@@ -1,6 +1,5 @@
 package me.savushkin.stargate.base.baseApp.mission.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import me.savushkin.stargate.base.baseApp.auth.model.User;
 import me.savushkin.stargate.base.baseApp.command.model.Command;
@@ -37,6 +36,12 @@ public class Mission {
     @Column(name = "date_departure", nullable = false)
     private Date dateDeparture;
 
+    @Column(name = "approved", nullable = false)
+    private Boolean approved;
+
+    @Column(name = "cancel", nullable = false)
+    private Boolean cancel;
+
     @ManyToOne
     @JoinColumn(name = "zone_to_id")
     private Zone zone;
@@ -45,7 +50,6 @@ public class Mission {
     @JoinColumn(name = "command_departure")
     private Command command;
 
-    @OneToMany(mappedBy = "mission", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Report> report = new HashSet<>();
+    @OneToMany(mappedBy = "report", fetch = FetchType.LAZY)
+    private Set<Report> mission  = new HashSet<>();
 }

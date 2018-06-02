@@ -68,9 +68,11 @@ CREATE  TABLE mission (
   name varchar (200) NOT NULL ,
   zone_to_id BIGINT NOT NULL REFERENCES "zone" (id),
   date_create TIMESTAMP NOT NULL,
-  date_departure TIMESTAMP NOT NULL,
+  date_departure TIMESTAMP,
   command_departure BIGINT NOT NULL REFERENCES "command" (id),
   description TEXT,
+  approved BIT not null,
+  cancel BIT not null,
   PRIMARY  KEY(id)
 );
 

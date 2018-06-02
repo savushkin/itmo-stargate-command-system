@@ -15,10 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -56,6 +53,7 @@ public class MissionController {
             @RequestParam() String description,
             @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateCreate,
             @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateDeparture,
+            @RequestParam() Boolean approved,
             @RequestParam() Long zoneId,
             @RequestParam() Long commandId) {
         try {
@@ -66,7 +64,8 @@ public class MissionController {
             mission.setDateDeparture(dateDeparture);
             mission.setZone(zoneRepository.findOne(zoneId));
             mission.setCommand(commandRepository.findOne(commandId));
-
+            mission.setApproved(approved);
+            mission.setCancel(false);
             return new ResponseEntity(missionRepository.save(mission), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -79,6 +78,7 @@ public class MissionController {
             @RequestParam() String description,
             @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateCreate,
             @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateDeparture,
+            @RequestParam() Boolean approved,
             @RequestParam() Long zoneId,
             @RequestParam() Long commandId,
             @PathVariable() Long id) {
@@ -91,6 +91,7 @@ public class MissionController {
             mission.setDateDeparture(dateDeparture);
             mission.setZone(zoneRepository.findOne(zoneId));
             mission.setCommand(commandRepository.findOne(commandId));
+            mission.setApproved(approved);
 
             return new ResponseEntity(missionRepository.save(mission), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -98,5 +99,19 @@ public class MissionController {
         }
     }
 
-
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}/cancel/{cancel}")
+    public ResponseEntity cancel(
+            @PathVariable Long id,
+            @PathVariable Boolean cancel
+    ){
+        try{
+            Mission mission = missionRepository.findOne(id);
+            mission.setCancel(cancel);
+            missionRepository.save(mission);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
