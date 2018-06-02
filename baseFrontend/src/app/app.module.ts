@@ -39,6 +39,7 @@ import {MissionCreatePageComponent} from "@sgc/_component/page/mission-create-pa
 import {UserEditPageComponent} from "@sgc/_component/page/user-edit-page/user-edit-page.component";
 import {UserCreatePageComponent} from "@sgc/_component/page/user-create-page/user-create-page.component";
 import {UserFormComponent} from "@sgc/_component/user/user-form/user-form.component";
+import {UserResolver} from "@sgc/_service/user/user.resolver";
 
 
 @NgModule({
@@ -107,6 +108,7 @@ import {UserFormComponent} from "@sgc/_component/user/user-form/user-form.compon
     },
 
     UserService,
+    UserResolver,
     UserListService,
     CommandService,
     CommandListService,

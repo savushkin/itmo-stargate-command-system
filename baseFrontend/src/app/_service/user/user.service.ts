@@ -38,12 +38,13 @@ export class UserService {
     );
   }
 
-  upodateOne(id: number, user: any): Observable<User> {
+  updateOne(id: number, user: any): Observable<User> {
     const params: HttpParams = new HttpParams();
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.put<User>(
       `/${environment.context}/${environment.api.user}/${id}`,
       JSON.stringify(user),
-      { params }
+      { params, headers }
     );
   }
 

@@ -32,7 +32,7 @@
   <ng-container matColumnDef="roles">
     <mat-header-cell *matHeaderCellDef> Роли </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <ul>
+      <ul class="unstyle-list">
         <li *ngFor="let role of row.userRole">
           {{role.role}}
         </li>
@@ -54,6 +54,15 @@
     <mat-cell *matCellDef="let row">
       <button mat-icon-button color="primary" [routerLink]="['/user', row.id]">
         <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="icon-delete">
+    <mat-header-cell *matHeaderCellDef>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button color="warn" (click)="delete(row)">
+        <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>
   </ng-container>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/map'
 import {UserService} from "@sgc/_service/user/user.service";
@@ -19,6 +19,9 @@ export class UserFormComponent implements OnInit {
   public form: FormGroup;
   public item: any = {};
 
+  @Input()
+  public user: User = null;
+
   constructor(route: ActivatedRoute,
               router: Router,
               userService: UserService,
@@ -30,30 +33,60 @@ export class UserFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      id: new FormControl({
-        value: null,
-        disabled: true
-      }),
-      username: new FormControl(null,  Validators.required),
-      name: new FormControl(null),
-      secondName: new FormControl(null),
-      surname: new FormControl(null),
-      rank: new FormControl(null),
-      password: new FormControl(null),
-      enable: new FormControl(null),
-      userRole: new FormControl(null),
-      command: new FormControl(null)
-    });
+    if (this.user) {
+      this.user.userRole = this.user.userRole.map(item => item.role);
+      this.item = this.user;
+      console.log(this.item)
+      this.form = this.formBuilder.group({
+        id: new FormControl({
+          value: this.item.id,
+          disabled: true
+        }),
+        username: new FormControl(this.item.username,  Validators.required),
+        name: new FormControl(this.item.name),
+        secondName: new FormControl(this.item.secondName),
+        surname: new FormControl(this.item.surname),
+        rank: new FormControl(this.item.rank),
+        password: new FormControl(null),
+        enable: new FormControl(this.item.enable),
+        userRole: new FormControl(this.item.userRole),
+        command: new FormControl(this.item.command)
+      })
+    } else {
+      this.form = this.formBuilder.group({
+        id: new FormControl({
+          value: null,
+          disabled: true
+        }),
+        username: new FormControl(null,  Validators.required),
+        name: new FormControl(null),
+        secondName: new FormControl(null),
+        surname: new FormControl(null),
+        rank: new FormControl(null),
+        password: new FormControl(null),
+        enable: new FormControl(null),
+        userRole: new FormControl(null),
+        command: new FormControl(null)
+      })
+    }
   }
 
 
   save(form) {
-    console.log(form.valid);
-    console.log(form.value);
-    console.log(this.item);
     if (form.valid) {
-      if (form.value.id) {
+      this.item.userRole = this.item.userRole.map( item => {return {role: item}});
+      if (this.item.id) {
+        this.userService.updateOne(this.item.id, this.item).subscribe(
+          item => {
+            this.router.navigate(['../'], {relativeTo: this.route})
+          },
+          error => {
+
+          },
+          () => {
+
+          }
+        )
 
       } else {
         this.userService.createOne(this.item).subscribe(
