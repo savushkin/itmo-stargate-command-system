@@ -22,7 +22,6 @@ public class Report {
 
     @ManyToOne
     @JoinColumn(name = "mission_id", nullable = false)
-    @JsonIgnore
     private Mission mission;
 
     @Column(name = "description", nullable = false)

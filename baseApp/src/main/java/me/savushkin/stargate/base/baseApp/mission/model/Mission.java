@@ -1,5 +1,6 @@
 package me.savushkin.stargate.base.baseApp.mission.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import me.savushkin.stargate.base.baseApp.auth.model.User;
 import me.savushkin.stargate.base.baseApp.command.model.Command;
@@ -45,5 +46,6 @@ public class Mission {
     private Command command;
 
     @OneToMany(mappedBy = "mission", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Report> report = new HashSet<>();
 }

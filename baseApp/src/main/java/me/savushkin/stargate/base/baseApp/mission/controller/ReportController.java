@@ -1,5 +1,6 @@
 package me.savushkin.stargate.base.baseApp.mission.controller;
 
+import me.savushkin.stargate.base.baseApp.auth.model.User;
 import me.savushkin.stargate.base.baseApp.command.repository.CommandRepository;
 import me.savushkin.stargate.base.baseApp.mission.model.Mission;
 import me.savushkin.stargate.base.baseApp.mission.model.Report;
@@ -11,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/api/report")
@@ -57,7 +61,7 @@ public class ReportController {
             @RequestBody() Report report
     ) {
         try {
-            if(report.getMission() == null)
+            if(!modelIsValid(report))
                 return new ResponseEntity(HttpStatus.NO_CONTENT);
             Report saved = reportRepository.save(report);
             return new ResponseEntity(saved, HttpStatus.CREATED);
@@ -66,16 +70,51 @@ public class ReportController {
         }
     }
 
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
     public ResponseEntity update(
             @RequestBody() Report report
     ){
         try{
             if(report.getId() <= 0 ||
-                report)
+                !modelIsValid(report))
+                return new ResponseEntity(HttpStatus.NO_CONTENT);
+
+            Report saved = reportRepository.save(report);
+            return new ResponseEntity(saved, HttpStatus.OK);
         }
         catch(Exception e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
 
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity delete(
+            @PathVariable() Long id
+    ){
+        try{
+            if(id <= 0)
+                return new ResponseEntity(HttpStatus.NO_CONTENT);
+            reportRepository.delete(id);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    private boolean modelIsValid(Report report){
+        if(report.getUser() == null ||
+            report.getUser() != null && report.getUser().getId() <= 0 ||
+            report.getMission() == null)
+            return false;
+        Mission mission = missionRepository.findOne(report.getMission().getId());
+        Set<User> usersInMission = mission.getCommand().getMembers();
+
+        List<User> resFilter = usersInMission.stream().filter(mis -> mis.getId().equals(report.getUser().getId())).collect(Collectors.toList());
+
+        if(resFilter.isEmpty()){
+            return false;
+        }
+        return true;
+    }
 }
