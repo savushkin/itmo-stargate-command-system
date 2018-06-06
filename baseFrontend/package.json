@@ -6,6 +6,7 @@
     "ng": "./node_modules/.bin/ng",
     "start": "./node_modules/.bin/ng serve --live-reload --watch --dev --host stargate-base.dev.local --port 4201",
     "build": "./node_modules/.bin/ng build --dev",
+    "build-to-jar": "./node_modules/.bin/ng build --prod --output-path ../baseApp/src/main/resources/static --output-hashing none",
     "buildRelative": "./node_modules/.bin/ng build --dev --base-href .",
     "test": "./node_modules/.bin/ng test",
     "lint": "./node_modules/.bin/ng lint",
