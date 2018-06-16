@@ -18,32 +18,13 @@
   </mat-form-field>
   <mat-form-field>
     <mat-select placeholder="Члены" [multiple]="true" formGroupName="members" [(value)]="item.members">
-      <mat-option *ngFor="let user of avalibleUsers | async" [value]="user.id">{{user?.rank}} {{user?.name}} {{user?.surname}} ({{user?.username}})</mat-option>
+      <mat-option *ngFor="let user of availableUsers | async" [value]="user.id">{{user?.rank}} {{user?.name}} {{user?.surname}} ({{user?.username}})</mat-option>
     </mat-select>
     <mat-error>Это обязательное поле</mat-error>
   </mat-form-field>
   <mat-form-field>
     <textarea matInput mat-autosize placeholder="Описание" formGroupName="description" [(value)]="item.description"></textarea>
   </mat-form-field>
-
-  <!--<mat-form-field>
-    <input type="text" matInput placeholder="Имя" [(ngModel)]="item.name" formControlName="name">
-    <mat-error>Это обязательное поле</mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <input type="text" matInput placeholder="Фамилия" [(ngModel)]="item.surname" formControlName="surname">
-    <mat-error>Это обязательное поле</mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <input type="text" matInput placeholder="Звание" [(ngModel)]="item.rank" formControlName="rank">
-    <mat-error>Это обязательное поле</mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <input type="password" matInput placeholder="Пароль" [(ngModel)]="item.password" formControlName="password">
-    <mat-error>Это обязательное поле</mat-error>
-  </mat-form-field>
- -->
-
   <button type="submit" mat-raised-button color="primary">
     Сохранить
   </button>

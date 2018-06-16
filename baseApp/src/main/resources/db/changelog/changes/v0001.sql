@@ -1,5 +1,5 @@
 CREATE TABLE command_type(
-  id BIGSERIAL NOT NULL,
+  id BIGINT NOT NULL,
   name VARCHAR (200) NOT NULL,
   description TEXT,
   PRIMARY  KEY (id)

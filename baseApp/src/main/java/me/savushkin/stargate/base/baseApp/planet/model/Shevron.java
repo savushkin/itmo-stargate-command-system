@@ -1,13 +1,12 @@
 package me.savushkin.stargate.base.baseApp.planet.model;
 
 import lombok.Data;
-import me.savushkin.stargate.base.baseApp.mission.model.Mission;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "shevron")
 public class Shevron {
@@ -18,4 +17,8 @@ public class Shevron {
 
     @Column(name = "name", nullable = false, length = 200)
     private String name;
+
+    public Shevron(String name) {
+        this.name = name;
+    }
 }

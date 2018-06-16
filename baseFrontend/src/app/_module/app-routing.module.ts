@@ -14,6 +14,9 @@ import {UserResolver} from "@sgc/_service/user/user.resolver";
 import {CommandCreatePageComponent} from "@sgc/_component/page/command-create-page/command-create-page.component";
 import {CommandResolver} from "@sgc/_service/command/command.resolver";
 import {CommandEditPageComponent} from "@sgc/_component/page/command-edit-page/command-edit-page.component";
+import {ZoneCreatePageComponent} from "@sgc/_component/page/zone-create-page/zone-create-page.component";
+import {ZoneEditPageComponent} from "@sgc/_component/page/zone-edit-page/zone-edit-page.component";
+import {ZoneResolver} from "@sgc/_service/zone/zone.resolver";
 
 const routes: Routes = [
   {
@@ -72,9 +75,23 @@ const routes: Routes = [
   },
   {
     path: 'zone',
-    component: ZoneListPageComponent,
     children: [
-
+      {
+        path: '',
+        pathMatch: 'full',
+        component: ZoneListPageComponent,
+      },
+      {
+        path: 'create',
+        component: ZoneCreatePageComponent
+      },
+      {
+        path: ':id',
+        resolve: {
+          zone: ZoneResolver
+        },
+        component: ZoneEditPageComponent
+      }
     ]
   },
   {

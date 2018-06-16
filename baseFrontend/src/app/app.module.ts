@@ -46,6 +46,10 @@ import {CommandCreatePageComponent} from "@sgc/_component/page/command-create-pa
 import {CommandEditPageComponent} from "@sgc/_component/page/command-edit-page/command-edit-page.component";
 import {CommandFormComponent} from "@sgc/_component/command/command-form/command-form.component";
 import {CommandResolver} from "@sgc/_service/command/command.resolver";
+import {ZoneCreatePageComponent} from "@sgc/_component/page/zone-create-page/zone-create-page.component";
+import {ZoneEditPageComponent} from "@sgc/_component/page/zone-edit-page/zone-edit-page.component";
+import {ZoneFormComponent} from "@sgc/_component/zone/zone-form/zone-form.component";
+import {ZoneResolver} from "@sgc/_service/zone/zone.resolver";
 
 
 @NgModule({
@@ -81,9 +85,11 @@ import {CommandResolver} from "@sgc/_service/command/command.resolver";
     UserCreatePageComponent,
     CommandCreatePageComponent,
     MissionCreatePageComponent,
+    ZoneCreatePageComponent,
 
     UserEditPageComponent,
     CommandEditPageComponent,
+    ZoneEditPageComponent,
 
     ListComponent,
     UserListComponent,
@@ -94,6 +100,7 @@ import {CommandResolver} from "@sgc/_service/command/command.resolver";
     MissionCreateComponent,
     UserFormComponent,
     CommandFormComponent,
+    ZoneFormComponent,
 
     UserRolePipe,
     CommandPipe
@@ -126,6 +133,7 @@ import {CommandResolver} from "@sgc/_service/command/command.resolver";
     CommandResolver,
     CommandListService,
     ZoneService,
+    ZoneResolver,
     ZoneListService,
     MissionService,
     MissionListService

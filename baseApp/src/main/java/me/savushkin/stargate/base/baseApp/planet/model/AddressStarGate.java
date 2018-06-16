@@ -1,16 +1,15 @@
 package me.savushkin.stargate.base.baseApp.planet.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import static javax.persistence.GenerationType.SEQUENCE;
-
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "address_star_gate")
 public class AddressStarGate {
@@ -52,4 +51,16 @@ public class AddressStarGate {
     @ManyToOne
     @JoinColumn(name = "glyph7")
     private Shevron Glyph7;
+
+    public AddressStarGate(String humanName, String physicalName, Shevron glyph1, Shevron glyph2, Shevron glyph3, Shevron glyph4, Shevron glyph5, Shevron glyph6, Shevron glyph7) {
+        this.humanName = humanName;
+        this.physicalName = physicalName;
+        Glyph1 = glyph1;
+        Glyph2 = glyph2;
+        Glyph3 = glyph3;
+        Glyph4 = glyph4;
+        Glyph5 = glyph5;
+        Glyph6 = glyph6;
+        Glyph7 = glyph7;
+    }
 }

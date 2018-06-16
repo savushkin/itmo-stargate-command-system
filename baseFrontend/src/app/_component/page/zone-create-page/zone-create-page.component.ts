@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {PageHeightService} from "app/_service/page/page-height.service";
+import {PageComponent} from "@sgc/_component/page/page/page.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "@sgc/_service/user/auth.service";
-import {PageComponent} from "@sgc/_component/page/page/page.component";
 
 @Component({
-  selector: 'sgc-zone-list-page',
-  templateUrl: './zone-list-page.component.html',
-  styleUrls: ['./zone-list-page.component.scss']
+  selector: 'sgc-zone-create-page',
+  templateUrl: './zone-create-page.component.html',
+  styleUrls: ['./zone-create-page.component.scss']
 })
-export class ZoneListPageComponent extends PageComponent implements OnInit {
+export class ZoneCreatePageComponent extends PageComponent implements OnInit {
 
   constructor(
     route: ActivatedRoute,

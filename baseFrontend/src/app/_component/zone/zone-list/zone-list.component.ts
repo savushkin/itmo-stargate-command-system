@@ -29,7 +29,7 @@ export class ZoneListComponent
   ngOnInit() {
     super.ngOnInit();
 
-    this.columns = ['zone', 'glyphs'];
+    this.columns = ['zone', 'climate', 'minerals', 'mititaryThreats', 'glyphs', 'icon-edit', 'icon-delete'];
 
     this.pagination.page.subscribe(
       (event: PageEvent) => {
@@ -38,4 +38,7 @@ export class ZoneListComponent
     this.dataSource.getPage(this.pageIndex, this.pageSize);
   }
 
+  delete(zone) {
+
+  }
 }

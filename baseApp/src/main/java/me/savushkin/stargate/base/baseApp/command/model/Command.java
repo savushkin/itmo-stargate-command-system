@@ -3,7 +3,9 @@ package me.savushkin.stargate.base.baseApp.command.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.savushkin.stargate.base.baseApp.auth.model.User;
 import me.savushkin.stargate.base.baseApp.mission.model.Mission;
 
@@ -12,6 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "command")
 public class Command {
@@ -37,4 +41,12 @@ public class Command {
     @JsonIgnore
     @OneToMany(mappedBy = "command")
     private Set<Mission> missions = new HashSet<>();
+
+    public Command(String name, CommandType commandType, String description, Set<User> members, Set<Mission> missions) {
+        this.name = name;
+        this.commandType = commandType;
+        this.description = description;
+        this.members = members;
+        this.missions = missions;
+    }
 }

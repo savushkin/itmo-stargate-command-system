@@ -2,26 +2,63 @@
   <ng-container matColumnDef="zone">
     <mat-header-cell *matHeaderCellDef> Зона </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <button mat-raised-button color="primary" [routerLink]="['/zone', row.id]">
-        {{row.name}}
-      </button>
+      {{row.name}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="climate">
+    <mat-header-cell *matHeaderCellDef> Климат </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        {{row?.climaticConditions}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="minerals">
+    <mat-header-cell *matHeaderCellDef> Минералы </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        {{row?.minerals}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="mititaryThreats">
+    <mat-header-cell *matHeaderCellDef> Обстановка </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        {{row?.mititaryThreats}}
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="glyphs">
     <mat-header-cell *matHeaderCellDef> Адресс </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <sgc-glyph [id]="row.glyph1">
+      <sgc-glyph [name]="row?.addressStarGate?.glyph1?.name">
       </sgc-glyph>
-      <sgc-glyph [id]="row.glyph2">
+      <sgc-glyph [name]="row?.addressStarGate?.glyph2?.name">
       </sgc-glyph>
-      <sgc-glyph [id]="row.glyph3">
+      <sgc-glyph [name]="row?.addressStarGate?.glyph3?.name">
       </sgc-glyph>
-      <sgc-glyph [id]="row.glyph4">
+      <sgc-glyph [name]="row?.addressStarGate?.glyph4?.name">
       </sgc-glyph>
-      <sgc-glyph [id]="row.glyph5">
+      <sgc-glyph [name]="row?.addressStarGate?.glyph5?.name">
       </sgc-glyph>
-      <sgc-glyph [id]="row.glyph6">
+      <sgc-glyph [name]="row?.addressStarGate?.glyph6?.name">
       </sgc-glyph>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="icon-edit">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button color="primary" routerLink="/zone/create">
+        <mat-icon>add_box</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button color="primary" [routerLink]="['/zone', row.id]">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="icon-delete">
+    <mat-header-cell *matHeaderCellDef>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button color="warn" (click)="delete(row)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="columns"></mat-header-row>

@@ -20,7 +20,7 @@ export class CommandFormComponent implements OnInit {
   private userService: UserService;
   private formBuilder: FormBuilder;
 
-  public avalibleUsers: Subject<User[]> = new Subject<User[]>();
+  public availableUsers: Subject<User[]> = new Subject<User[]>();
 
   public form: FormGroup;
   public item: any = {
@@ -48,7 +48,7 @@ export class CommandFormComponent implements OnInit {
   ngOnInit() {
     this.userService.getAllForCommand(this.command?this.command.id:null).subscribe(
       (users) => {
-        this.avalibleUsers.next(users);
+        this.availableUsers.next(users);
       }
     );
     if (this.command) {
@@ -80,7 +80,6 @@ export class CommandFormComponent implements OnInit {
 
 
   save(form) {
-    console.log(this.item.members)
     this.form.controls['members'].setValue(this.item.members);
     if (form.valid) {
       this.item.members = this.item.members.map(item => {

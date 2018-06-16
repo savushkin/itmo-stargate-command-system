@@ -1,11 +1,10 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {GlyphService} from "../../../_service/stargate/glyph.service";
+import {GlyphService} from "@sgc/_service/stargate/glyph.service";
 
 @Component({
   selector: 'sgc-glyph',
   templateUrl: './glyph.component.html',
-  styleUrls: ['./glyph.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./glyph.component.scss']
 })
 export class GlyphComponent implements OnInit, OnChanges {
 
@@ -27,6 +26,7 @@ export class GlyphComponent implements OnInit, OnChanges {
       if (glyph)
         this.url = glyph.url;
     }
+
     if (this.id !== null && 'id' in changes) {
       let glyph = this.glyphService.glyphs[this.id-1];
       if (glyph) {

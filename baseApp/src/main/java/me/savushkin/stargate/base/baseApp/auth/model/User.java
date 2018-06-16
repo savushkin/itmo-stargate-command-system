@@ -1,7 +1,9 @@
 package me.savushkin.stargate.base.baseApp.auth.model;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.savushkin.stargate.base.baseApp.command.model.Command;
 
 import javax.persistence.*;
@@ -11,6 +13,8 @@ import java.util.Set;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "\"user\"")
 public class User {
@@ -48,6 +52,17 @@ public class User {
     @Column(name = "command_id")
     private Long command;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserRole> userRole = new HashSet<>(0);
+
+    public User(String username, String name, String secondName, String surname, String rank, String password, boolean enabled, Set<UserRole> userRole) {
+        this.username = username;
+        this.name = name;
+        this.secondName = secondName;
+        this.surname = surname;
+        this.rank = rank;
+        this.password = password;
+        this.enabled = enabled;
+        this.userRole = userRole;
+    }
 }
