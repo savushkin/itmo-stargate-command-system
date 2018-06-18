@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
 
 @Controller
-@RequestMapping("/api/addressStarGate")
+@RequestMapping("/api/address-star-gate")
 public class AddressStarGateController {
     private final AddressStarGateRepository addressStarGateRepository;
 

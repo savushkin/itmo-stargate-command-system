@@ -4,6 +4,27 @@
     <mat-hint align="start" *ngIf="!id.value">Будет присвоен после создания</mat-hint>
   </mat-form-field>
   <mat-form-field>
+    <mat-select matInput placeholder="Адрес" [value]="item?.addressStarGate?.id" (valueChange)="selectAddress($event)">
+      <mat-option *ngFor="let address of addresses | async" [value]="address?.id" >
+        {{address?.humanName}} ({{address?.physicalName}})
+        <sgc-glyph [name]="address?.glyph1?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph2?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph3?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph4?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph5?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph6?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph7?.name">
+        </sgc-glyph>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
     <input type="text" matInput placeholder="Название" [(ngModel)]="item.name" formControlName="name">
     <mat-error>Это обязательное поле</mat-error>
   </mat-form-field>
@@ -15,21 +36,6 @@
   </mat-form-field>
   <mat-form-field>
     <textarea mat-autosize matInput placeholder="Ресурсы" [(ngModel)]="item.minerals" formControlName="minerals"></textarea>
-  </mat-form-field>
-  <mat-form-field>
-    <input type="text" matInput readonly>
-    <sgc-glyph matPrefix [id]="1">
-    </sgc-glyph>
-    <sgc-glyph matPrefix [id]="1">
-    </sgc-glyph>
-    <sgc-glyph matPrefix [id]="1">
-    </sgc-glyph>
-    <sgc-glyph matPrefix [id]="1">
-    </sgc-glyph>
-    <sgc-glyph matPrefix [id]="1">
-    </sgc-glyph>
-    <sgc-glyph matPrefix [id]="1">
-    </sgc-glyph>
   </mat-form-field>
   <button type="submit" mat-raised-button color="primary">
     Сохранить

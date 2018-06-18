@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ZoneRepository extends PagingAndSortingRepository<Zone, Long> {
     List<Zone> findByNameStartingWithOrderByName(String name);
+    List<Zone> findAll();
 }

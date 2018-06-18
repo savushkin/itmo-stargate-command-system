@@ -20,7 +20,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class CommandType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 

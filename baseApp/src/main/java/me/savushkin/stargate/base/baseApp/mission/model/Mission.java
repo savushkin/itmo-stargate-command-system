@@ -1,6 +1,8 @@
 package me.savushkin.stargate.base.baseApp.mission.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.savushkin.stargate.base.baseApp.auth.model.User;
 import me.savushkin.stargate.base.baseApp.command.model.Command;
 import me.savushkin.stargate.base.baseApp.planet.model.Zone;
@@ -15,6 +17,8 @@ import static javax.persistence.GenerationType.SEQUENCE;
 import static javax.persistence.GenerationType.TABLE;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "mission")
 public class Mission {

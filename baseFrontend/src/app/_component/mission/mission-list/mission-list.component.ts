@@ -27,7 +27,7 @@ export class MissionListComponent
   ngOnInit() {
     super.ngOnInit();
 
-    this.columns = ['id', 'zone', 'command', 'date'];
+    this.columns = ['id', 'zone', 'command', 'date', 'icon-edit'];
 
     this.pagination.page.subscribe(
       (event: PageEvent) => {

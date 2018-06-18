@@ -30,7 +30,7 @@ export class CommandListComponent
   ngOnInit() {
     super.ngOnInit();
 
-    this.columns = ['number', 'name', 'type', 'members', 'description', 'icon-edit'];
+    this.columns = ['id', 'name', 'type', 'members', 'description', 'icon-edit'];
 
     this.pagination.page.subscribe(
       (event: PageEvent) => {

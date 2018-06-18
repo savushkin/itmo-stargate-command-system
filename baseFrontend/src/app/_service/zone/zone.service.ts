@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import {User} from "../../_model/user";
-import {Page} from "../../_model/page";
+import {Injectable} from '@angular/core';
+import {Page} from "@sgc/_model/page";
 import {Observable} from "rxjs/Observable";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {Command} from "@sgc/_model/command";
+import {environment} from "@env/environment";
 import {Zone} from "@sgc/_model/zone";
+import {Address} from "@sgc/_model/address";
 
 @Injectable()
 export class ZoneService {
@@ -18,6 +17,16 @@ export class ZoneService {
       .append('size', `${size}`);
     return this.http.get<Page<Zone>>(
       `/${environment.context}/${environment.api.zone}`,
+      { params }
+    );
+  }
+
+  getAllAddressStarGate(page: number, size: number): Observable<Page<Address>> {
+    const params: HttpParams = new HttpParams()
+      .append('page', `${page}`)
+      .append('size', `${size}`);
+    return this.http.get<Page<Address>>(
+      `/${environment.context}/${environment.api.addressStarGate}`,
       { params }
     );
   }

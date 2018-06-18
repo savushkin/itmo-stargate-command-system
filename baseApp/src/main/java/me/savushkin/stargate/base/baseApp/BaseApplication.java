@@ -10,9 +10,12 @@ import me.savushkin.stargate.base.baseApp.command.model.Command;
 import me.savushkin.stargate.base.baseApp.command.model.CommandType;
 import me.savushkin.stargate.base.baseApp.command.repository.CommandRepository;
 import me.savushkin.stargate.base.baseApp.command.repository.CommandTypeRepository;
+import me.savushkin.stargate.base.baseApp.mission.model.Mission;
 import me.savushkin.stargate.base.baseApp.mission.repository.MissionRepository;
+import me.savushkin.stargate.base.baseApp.mission.repository.ReportRepository;
 import me.savushkin.stargate.base.baseApp.planet.model.AddressStarGate;
 import me.savushkin.stargate.base.baseApp.planet.model.Shevron;
+import me.savushkin.stargate.base.baseApp.planet.model.Zone;
 import me.savushkin.stargate.base.baseApp.planet.repository.AddressStarGateRepository;
 import me.savushkin.stargate.base.baseApp.planet.repository.ShevronRepository;
 import me.savushkin.stargate.base.baseApp.planet.repository.ZoneRepository;
@@ -34,13 +37,14 @@ public class BaseApplication extends SpringBootServletInitializer implements Com
 	private final UserRoleRepository userRoleRepository;
 	private final CommandRepository commandRepository;
 	private final CommandTypeRepository commandTypeRepository;
-	private final MissionRepository missionRepository;
 	private final ShevronRepository shevronRepository;
 	private final AddressStarGateRepository addressStarGateRepository;
 	private final ZoneRepository zoneRepository;
+	private final MissionRepository missionRepository;
+	private final ReportRepository reportRepository;
 
 	@Autowired
-	public BaseApplication(UserRepository userRepository, UserRoleRepository userRoleRepository, CommandRepository commandRepository, CommandTypeRepository commandTypeRepository, MissionRepository missionRepository, ShevronRepository shevronRepository, AddressStarGateRepository addressStarGateRepository, ZoneRepository zoneRepository) {
+	public BaseApplication(UserRepository userRepository, UserRoleRepository userRoleRepository, CommandRepository commandRepository, CommandTypeRepository commandTypeRepository, MissionRepository missionRepository, ShevronRepository shevronRepository, AddressStarGateRepository addressStarGateRepository, ZoneRepository zoneRepository, ReportRepository reportRepository) {
 		this.userRepository = userRepository;
 		this.userRoleRepository = userRoleRepository;
 		this.commandRepository = commandRepository;
@@ -49,6 +53,7 @@ public class BaseApplication extends SpringBootServletInitializer implements Com
 		this.shevronRepository = shevronRepository;
 		this.addressStarGateRepository = addressStarGateRepository;
 		this.zoneRepository = zoneRepository;
+		this.reportRepository = reportRepository;
 	}
 
 	@Override
@@ -69,8 +74,20 @@ public class BaseApplication extends SpringBootServletInitializer implements Com
 
 	@Override
 	public void run(String... args) throws Exception {
+		missionRepository.deleteAll();
+
+		commandRepository.deleteAll();
+		commandTypeRepository.deleteAll();
+		userRoleRepository.deleteAll();
+		userRepository.deleteAll();
+
+		zoneRepository.deleteAll();
+		addressStarGateRepository.deleteAll();
+		shevronRepository.deleteAll();
+
 		populateUsers();
 		populatePlanets();
+		populateMissions();
 	}
 
 	String generatePhysicalPlanetName() {
@@ -78,11 +95,6 @@ public class BaseApplication extends SpringBootServletInitializer implements Com
 	}
 
 	void populateUsers() {
-		commandRepository.deleteAll();
-		commandTypeRepository.deleteAll();
-		userRoleRepository.deleteAll();
-		userRepository.deleteAll();
-
 		List<User> users = new ArrayList<>();
 		users.add(new User("admin",
 				faker.name().firstName(),
@@ -286,7 +298,7 @@ public class BaseApplication extends SpringBootServletInitializer implements Com
 		commands.add(command);
 
 		users = userRepository.findUsersForAddToCommand("ROLE_SCOUT");
-		command = new Command("SG-1", commandTypeRepository.findOne(3L), "Главный отряд разведки", new HashSet<User>(users.subList(0, 4)), null);
+		command = new Command("SG-1", commandTypeRepository.findOne(4L), "Главный отряд разведки", new HashSet<User>(users.subList(0, 4)), null);
 		commands.add(command);
 
 		users = userRepository.findUsersForAddToCommand("ROLE_DIPLOMAT");
@@ -297,50 +309,47 @@ public class BaseApplication extends SpringBootServletInitializer implements Com
 	}
 
 	void populatePlanets() {
-		addressStarGateRepository.deleteAll();
-		shevronRepository.deleteAll();
-
 		List<Shevron> shevrons = new ArrayList<>();
 		Collections.addAll(shevrons,
-				new Shevron("Earthnew"),
-				new Shevron("Craternew"),
-				new Shevron("Virgonew"),
-				new Shevron("Bootesnew"),
-				new Shevron("Centaurusnew"),
-				new Shevron("Libranew"),
-				new Shevron("Serpens Caputnew"),
-				new Shevron("Normanew"),
-				new Shevron("Scorpionew"),
-				new Shevron("Cranew"),
-				new Shevron("Scutumnew"),
-				new Shevron("Sagittariusnew"),
-				new Shevron("Aquilanew"),
-				new Shevron("Micnew"),
-				new Shevron("Capricornnew"),
-				new Shevron("Pisces Austrinusnew"),
-				new Shevron("Equuleusnew"),
-				new Shevron("Aquariusnew"),
-				new Shevron("Pegasusnew"),
-				new Shevron("Sculptornew"),
-				new Shevron("Piscesnew"),
-				new Shevron("Andromedanew"),
-				new Shevron("Triangulumnew"),
-				new Shevron("Ariesnew"),
-				new Shevron("Perseusnew"),
-				new Shevron("Cetusnew"),
-				new Shevron("Taurusnew"),
-				new Shevron("Auriganew"),
-				new Shevron("Eridanusnew"),
-				new Shevron("Orionnew"),
-				new Shevron("Canis Minornew"),
-				new Shevron("Monocerosnew"),
-				new Shevron("Gemininew"),
-				new Shevron("Hydranew"),
-				new Shevron("Lynxnew"),
-				new Shevron("Cancernew"),
-				new Shevron("Sextansnew"),
-				new Shevron("Leo Minornew"),
-				new Shevron("Leonew")
+				new Shevron("Earth"),
+				new Shevron("Crater"),
+				new Shevron("Virgo"),
+				new Shevron("Bootes"),
+				new Shevron("Centaurus"),
+				new Shevron("Libra"),
+				new Shevron("Serpens Caput"),
+				new Shevron("Norma"),
+				new Shevron("Scorpio"),
+				new Shevron("Cra"),
+				new Shevron("Scutum"),
+				new Shevron("Sagittarius"),
+				new Shevron("Aquila"),
+				new Shevron("Mic"),
+				new Shevron("Capricorn"),
+				new Shevron("Pisces Austrinus"),
+				new Shevron("Equuleus"),
+				new Shevron("Aquarius"),
+				new Shevron("Pegasus"),
+				new Shevron("Sculptor"),
+				new Shevron("Pisces"),
+				new Shevron("Andromeda"),
+				new Shevron("Triangulum"),
+				new Shevron("Aries"),
+				new Shevron("Perseus"),
+				new Shevron("Cetus"),
+				new Shevron("Taurus"),
+				new Shevron("Auriga"),
+				new Shevron("Eridanus"),
+				new Shevron("Orion"),
+				new Shevron("Canis Minor"),
+				new Shevron("Monoceros"),
+				new Shevron("Gemini"),
+				new Shevron("Hydra"),
+				new Shevron("Lynx"),
+				new Shevron("Cancer"),
+				new Shevron("Sextans"),
+				new Shevron("Leo Minor"),
+				new Shevron("Leo")
 		);
 
 		shevronRepository.save(shevrons);
@@ -405,14 +414,6 @@ public class BaseApplication extends SpringBootServletInitializer implements Com
 						shevrons.get(faker.number().numberBetween(0, shevrons.size()-1)),
 						null),
 				new AddressStarGate("DESTROYERS", generatePhysicalPlanetName(),
-						shevrons.get(faker.number().numberBetween(0, shevrons.size()-1)),
-						shevrons.get(faker.number().numberBetween(0, shevrons.size()-1)),
-						shevrons.get(faker.number().numberBetween(0, shevrons.size()-1)),
-						shevrons.get(faker.number().numberBetween(0, shevrons.size()-1)),
-						shevrons.get(faker.number().numberBetween(0, shevrons.size()-1)),
-						shevrons.get(faker.number().numberBetween(0, shevrons.size()-1)),
-						null),
-				new AddressStarGate("EARTH", generatePhysicalPlanetName(),
 						shevrons.get(faker.number().numberBetween(0, shevrons.size()-1)),
 						shevrons.get(faker.number().numberBetween(0, shevrons.size()-1)),
 						shevrons.get(faker.number().numberBetween(0, shevrons.size()-1)),
@@ -622,5 +623,40 @@ public class BaseApplication extends SpringBootServletInitializer implements Com
 						null));
 
 		addressStarGateRepository.save(addressStarGates);
+		addressStarGates = addressStarGateRepository.findAll();
+
+		List<Zone> zones = new ArrayList<>();
+		for (AddressStarGate addressStarGate: addressStarGates) {
+			if (faker.bool().bool())
+				continue;
+			Zone zone = new Zone();
+			zone.setAddressStarGate(addressStarGate);
+			zone.setName(addressStarGate.getHumanName());
+			zone.setClimaticConditions(faker.lorem().paragraph(2));
+			zone.setMinerals(faker.lorem().paragraph(2));
+			zone.setMititaryThreats(faker.lorem().paragraph(2));
+			zones.add(zone);
+		}
+		zoneRepository.save(zones);
+	}
+
+	void populateMissions() {
+		List<Zone> zones = zoneRepository.findAll();
+		List<Command> commands = commandRepository.findAll();
+
+		List<Mission> missions = new ArrayList<>();
+		for (Zone zone: zones) {
+			Mission mission = new Mission();
+			mission.setName("Mission to " + zone.getName());
+			mission.setZone(zone);
+			mission.setDateCreate(new Date());
+			mission.setCommand(commands.get(faker.number().numberBetween(0, commands.size() - 1)));
+			mission.setDescription(faker.lorem().paragraph(2));
+			mission.setCancel(false);
+			mission.setApproved(false);
+			mission.setCancel(false);
+			missions.add(mission);
+		}
+		missionRepository.save(missions);
 	}
 }

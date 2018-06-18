@@ -4,6 +4,8 @@ import 'rxjs/add/operator/map'
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ZoneService} from "@sgc/_service/zone/zone.service";
 import {Zone} from "@sgc/_model/zone";
+import {Subject} from "rxjs/Subject";
+import {Address} from "@sgc/_model/address";
 
 @Component({
   selector: 'sgc-zone-form',
@@ -24,6 +26,8 @@ export class ZoneFormComponent implements OnInit {
     }
   };
 
+  public addresses: Subject<Address[]> = new Subject<Address[]>();
+
   @Input()
   public zone: Zone = null;
 
@@ -38,6 +42,12 @@ export class ZoneFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.zoneService.getAllAddressStarGate(0, 9999).subscribe(
+      pageAddresses => this.addresses.next(pageAddresses.content),
+      error => console.log(error),
+      () => { }
+    );
+
     if (this.zone) {
       this.item = this.zone;
 
@@ -49,7 +59,8 @@ export class ZoneFormComponent implements OnInit {
         name: new FormControl(this.item.name,  Validators.required),
         climaticConditions: new FormControl(this.item.climaticConditions),
         mititaryThreats: new FormControl(this.item.mititaryThreats),
-        minerals: new FormControl(this.item.minerals)
+        minerals: new FormControl(this.item.minerals),
+        addressStarGate: new FormControl(this.item.addressStarGate)
       });
     } else {
       this.form = this.formBuilder.group({
@@ -60,7 +71,8 @@ export class ZoneFormComponent implements OnInit {
         name: new FormControl(null,  Validators.required),
         climaticConditions: new FormControl(null),
         mititaryThreats: new FormControl(null),
-        minerals: new FormControl(null)
+        minerals: new FormControl(null),
+        addressStarGate: new FormControl(null)
       })
     }
   }
@@ -94,6 +106,13 @@ export class ZoneFormComponent implements OnInit {
           }
         )
       }
+    }
+  }
+
+  selectAddress(addressStarGateId) {
+    if (addressStarGateId) {
+      this.item['addressStarGate']['id'] = addressStarGateId;
+      // this.item['name'] = ;
     }
   }
 }

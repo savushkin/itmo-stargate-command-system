@@ -17,6 +17,7 @@ export const environment = {
     user: 'user',
     command: 'command',
     zone: 'zone',
+    addressStarGate: 'address-star-gate',
     mission: 'mission'
   }
 };

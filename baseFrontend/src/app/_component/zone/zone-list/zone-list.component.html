@@ -1,4 +1,10 @@
 <mat-table #table [dataSource]="dataSource">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row.id}}
+    </mat-cell>
+  </ng-container>
   <ng-container matColumnDef="zone">
     <mat-header-cell *matHeaderCellDef> Зона </mat-header-cell>
     <mat-cell *matCellDef="let row">
@@ -37,6 +43,8 @@
       <sgc-glyph [name]="row?.addressStarGate?.glyph5?.name">
       </sgc-glyph>
       <sgc-glyph [name]="row?.addressStarGate?.glyph6?.name">
+      </sgc-glyph>
+      <sgc-glyph [name]="row?.addressStarGate?.glyph7?.name">
       </sgc-glyph>
     </mat-cell>
   </ng-container>

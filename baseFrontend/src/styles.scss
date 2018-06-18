@@ -42,3 +42,8 @@ mat-form-field {
 .unstyle-list {
   list-style: none; padding: 0; margin: 0;
 }
+
+.mat-option-text {
+  display: inline-flex!important;
+  align-items: center;
+}

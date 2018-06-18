@@ -7,6 +7,7 @@ import {CommandListService} from "@sgc/_service/command/command-list.service";
 import {User} from "@sgc/_model/user";
 import {Zone} from "@sgc/_model/zone";
 import {ZoneListService} from "@sgc/_service/zone/zone-list.service";
+import {ZoneService} from "@sgc/_service/zone/zone.service";
 
 @Component({
   selector: 'sgc-zone-list',
@@ -16,20 +17,23 @@ import {ZoneListService} from "@sgc/_service/zone/zone-list.service";
 export class ZoneListComponent
   extends ListComponent<Zone, ZoneListService>
   implements OnInit {
+  private zoneService: ZoneService;
 
   constructor(route: ActivatedRoute,
               router: Router,
-              zoneListService: ZoneListService) {
+              zoneListService: ZoneListService,
+              zoneService: ZoneService) {
     super(route, router);
     this.dataSource = zoneListService;
+    this.zoneService = zoneService;
     this.pageIndexParamName = 'zone_page';
     this.pageSizeParamName = 'zone_size';
+    this.pageSize = 5;
   }
 
   ngOnInit() {
     super.ngOnInit();
-
-    this.columns = ['zone', 'climate', 'minerals', 'mititaryThreats', 'glyphs', 'icon-edit', 'icon-delete'];
+    this.columns = ['id', 'zone', 'climate', 'minerals', 'mititaryThreats', 'glyphs', 'icon-edit', 'icon-delete'];
 
     this.pagination.page.subscribe(
       (event: PageEvent) => {
@@ -39,6 +43,18 @@ export class ZoneListComponent
   }
 
   delete(zone) {
+    if (zone)
+      this.zoneService.deleteOne(zone.id).subscribe(
+        resp => {
+          this.dataSource.getPage(this.pageIndex, this.pageSize);
+        },
+        error => {
+
+        },
+        () => {
+
+        }
+      );
 
   }
 }

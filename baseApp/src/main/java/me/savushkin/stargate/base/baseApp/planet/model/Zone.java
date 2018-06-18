@@ -1,6 +1,8 @@
 package me.savushkin.stargate.base.baseApp.planet.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.savushkin.stargate.base.baseApp.mission.model.Mission;
 
 import javax.persistence.*;
@@ -11,6 +13,8 @@ import java.util.Set;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "zone")
 public class Zone {
@@ -24,7 +28,7 @@ public class Zone {
     private String name;
 
     @Column(name = "climatic_conditions")
-        private String climaticConditions;
+    private String climaticConditions;
 
     @Column(name = "mititary_threats")
     private String mititaryThreats;

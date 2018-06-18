@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface CommandRepository extends PagingAndSortingRepository<Command, Long> {
     List<Command> findByCommandTypeTypeNameStartingWith(String typeName);
+    List<Command> findAll();
 }
