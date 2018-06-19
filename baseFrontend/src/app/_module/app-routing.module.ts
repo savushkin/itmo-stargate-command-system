@@ -19,6 +19,7 @@ import {ZoneEditPageComponent} from "@sgc/_component/page/zone-edit-page/zone-ed
 import {ZoneResolver} from "@sgc/_service/zone/zone.resolver";
 import {MissionEditPageComponent} from "@sgc/_component/page/mission-edit-page/mission-edit-page.component";
 import {MissionResolver} from "@sgc/_service/mission/mission.resolver";
+import {StargateStatePageComponent} from "@sgc/_component/page/stargate-state-page/stargate-state-page.component";
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePageComponent
+  },
+  {
+    path: 'star-gate',
+    component: StargateStatePageComponent
   },
   {
     path: 'user',

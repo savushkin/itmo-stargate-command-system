@@ -13,11 +13,13 @@ export const environment = {
   },
   api: {
     find: 'find',
+    state: 'state',
 
     user: 'user',
     command: 'command',
     zone: 'zone',
     addressStarGate: 'address-star-gate',
-    mission: 'mission'
+    mission: 'mission',
+    stargate: 'star-gate'
   }
 };

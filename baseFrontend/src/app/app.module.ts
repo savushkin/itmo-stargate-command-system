@@ -54,6 +54,9 @@ import {MissionEditPageComponent} from "@sgc/_component/page/mission-edit-page/m
 import {MissionResolver} from "@sgc/_service/mission/mission.resolver";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
+import {StargateStateComponent} from "@sgc/_component/stargate/stargate-state/stargate-state.component";
+import {StargateStatePageComponent} from "@sgc/_component/page/stargate-state-page/stargate-state-page.component";
+import {StargateService} from "@sgc/_service/stargate/stargate.service";
 
 
 @NgModule({
@@ -71,6 +74,8 @@ import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-mome
     // StargatePageComponent,
 
     GlyphComponent,
+    StargateStateComponent,
+    StargateStatePageComponent,
 
     PageComponent,
     ProfilePageComponent,
@@ -140,7 +145,8 @@ import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-mome
     ZoneListService,
     MissionService,
     MissionResolver,
-    MissionListService
+    MissionListService,
+    StargateService
   ],
   bootstrap: [AppComponent]
 })

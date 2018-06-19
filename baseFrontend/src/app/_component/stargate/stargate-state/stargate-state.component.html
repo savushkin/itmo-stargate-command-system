@@ -1,0 +1,41 @@
+<form>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Статус врат" [value]="state?.stargateState" readonly>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Статус диафрагмы" [value]="state?.irisState" readonly>
+    <button matSuffix mat-raised-button color="primary" (click)="toggleIris()">
+      Открыть диафрагму
+    </button>
+    <button matSuffix mat-raised-button color="primary" (click)="toggleIris()">
+      Закрыть диафрагму
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select matInput placeholder="Адрес" (valueChange)="selectAddress($event)">
+      <mat-option *ngFor="let address of addresses | async" [value]="address?.id" >
+        {{address?.humanName}} ({{address?.physicalName}})
+        <sgc-glyph [name]="address?.glyph1?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph2?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph3?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph4?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph5?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph6?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="address?.glyph7?.name">
+        </sgc-glyph>
+      </mat-option>
+    </mat-select>
+    <button matSuffix mat-raised-button color="primary" (click)="open()">
+      Открыть врата
+    </button>
+    <button matSuffix mat-raised-button color="primary" (click)="close()">
+      Закрыть врата
+    </button>
+  </mat-form-field>
+</form>
