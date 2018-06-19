@@ -47,4 +47,30 @@ export class MissionService {
       { headers }
     );
   }
+
+  delete(id: number) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete(
+      `/${environment.context}/${environment.api.mission}/${id}`,
+      { headers }
+    );
+  }
+
+  approve(id: number) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put(
+      `/${environment.context}/${environment.api.mission}/${id}/approve/`,
+      null,
+      { headers }
+    );
+  }
+
+  cancel(id: number) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put(
+      `/${environment.context}/${environment.api.mission}/${id}/cancel/`,
+      null,
+      { headers }
+    );
+  }
 }

@@ -86,15 +86,43 @@ public class MissionController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/{id}/cancel/{cancel}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    public ResponseEntity delete(
+            @PathVariable() Long id) {
+        try {
+            Mission mission = missionRepository.findOne(id);
+            missionRepository.delete(mission.getId());
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}/cancel/")
     public ResponseEntity cancel(
-            @PathVariable Long id,
-            @PathVariable Boolean cancel
+            @PathVariable Long id
     ){
         try{
             Mission mission = missionRepository.findOne(id);
-            mission.setCancel(cancel);
+            mission.setCancel(true);
             missionRepository.save(mission);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}/approve/")
+    public ResponseEntity approve(
+            @PathVariable Long id
+    ){
+        try{
+            Mission mission = missionRepository.findOne(id);
+            if (!mission.getCancel()) {
+                mission.setApproved(true);
+                missionRepository.save(mission);
+            }
             return new ResponseEntity(HttpStatus.OK);
         }
         catch(Exception e){

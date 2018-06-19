@@ -56,12 +56,28 @@
       {{row?.description}}
     </mat-cell>
   </ng-container>
-  <ng-container matColumnDef="icon-action">
+  <ng-container matColumnDef="icon-approve">
     <mat-header-cell *matHeaderCellDef>
     </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <mat-icon *ngIf="row?.approved">done</mat-icon>
-      <mat-icon *ngIf="row?.cancel">cancel</mat-icon>
+      <button mat-icon-button color="primary" (click)="approveMission(row)" *ngIf="!row?.approved && !row?.cancel">
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button disabled *ngIf="row?.approved">
+        <mat-icon>done</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="icon-cancel">
+    <mat-header-cell *matHeaderCellDef>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button color="primary" (click)="cancelMission(row)" *ngIf="!row?.cancel">
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <button mat-icon-button disabled *ngIf="row?.cancel">
+        <mat-icon>cancel</mat-icon>
+      </button>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="icon-edit">
@@ -71,8 +87,17 @@
       </button>
     </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <button mat-icon-button color="primary" [routerLink]="['/mission', row.id]">
+      <button mat-icon-button color="primary" *ngIf="!row?.approved && !row?.cancel" [routerLink]="['/mission', row.id]">
         <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="icon-delete">
+    <mat-header-cell *matHeaderCellDef>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button color="warn" (click)="delete(row)">
+        <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>
   </ng-container>
