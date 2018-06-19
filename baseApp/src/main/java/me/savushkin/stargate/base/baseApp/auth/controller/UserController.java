@@ -126,10 +126,8 @@ public class UserController {
             Set<UserRole> roles = userData.getUserRole();
             userData.setUserRole(null);
             User savedUser = userRepository.save(user);
-            roles.forEach(role -> {
-                userRoleRepository.deleteAllByUser(savedUser.getId());
-                role.setUser(savedUser.getId());
-            });
+            userRoleRepository.deleteAllByUser(savedUser.getId());
+            roles.forEach(role -> role.setUser(savedUser.getId()));
             userRoleRepository.save(roles);
 
             return new ResponseEntity(userRepository.findOne(user.getId()), HttpStatus.OK);

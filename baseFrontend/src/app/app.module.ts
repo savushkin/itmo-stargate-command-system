@@ -33,7 +33,6 @@ import {ZoneListService} from "@sgc/_service/zone/zone-list.service";
 import {MissionListComponent} from "@sgc/_component/mission/mission-list/mission-list.component";
 import {MissionService} from "@sgc/_service/mission/mission.service";
 import {MissionListService} from "@sgc/_service/mission/mission-list.service";
-import {MissionCreateComponent} from "@sgc/_component/mission/mission-create/mission-create.component";
 import {MissionListPageComponent} from "@sgc/_component/page/mission-list-page/mission-list-page.component";
 import {MissionCreatePageComponent} from "@sgc/_component/page/mission-create-page/mission-create-page.component";
 import {UserEditPageComponent} from "@sgc/_component/page/user-edit-page/user-edit-page.component";
@@ -50,6 +49,11 @@ import {ZoneCreatePageComponent} from "@sgc/_component/page/zone-create-page/zon
 import {ZoneEditPageComponent} from "@sgc/_component/page/zone-edit-page/zone-edit-page.component";
 import {ZoneFormComponent} from "@sgc/_component/zone/zone-form/zone-form.component";
 import {ZoneResolver} from "@sgc/_service/zone/zone.resolver";
+import {MissionFormComponent} from "@sgc/_component/mission/mission-form/mission-form.component";
+import {MissionEditPageComponent} from "@sgc/_component/page/mission-edit-page/mission-edit-page.component";
+import {MissionResolver} from "@sgc/_service/mission/mission.resolver";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
 
 
 @NgModule({
@@ -63,10 +67,7 @@ import {ZoneResolver} from "@sgc/_service/zone/zone.resolver";
     // ReportCreatePageComponent,
     // AddressCreatePageComponent,
     // BaseListPageComponent,
-    // ZonePageComponent,
-    // ZoneCreatePageComponent,
     // MissionPageComponent,
-    // UserPageComponent,
     // StargatePageComponent,
 
     GlyphComponent,
@@ -89,6 +90,7 @@ import {ZoneResolver} from "@sgc/_service/zone/zone.resolver";
 
     UserEditPageComponent,
     CommandEditPageComponent,
+    MissionEditPageComponent,
     ZoneEditPageComponent,
 
     ListComponent,
@@ -97,7 +99,7 @@ import {ZoneResolver} from "@sgc/_service/zone/zone.resolver";
     ZoneListComponent,
     MissionListComponent,
 
-    MissionCreateComponent,
+    MissionFormComponent,
     UserFormComponent,
     CommandFormComponent,
     ZoneFormComponent,
@@ -125,7 +127,8 @@ import {ZoneResolver} from "@sgc/_service/zone/zone.resolver";
       useClass: BaseHttpInterceptorService,
       multi: true
     },
-
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
     UserService,
     UserResolver,
     UserListService,
@@ -136,6 +139,7 @@ import {ZoneResolver} from "@sgc/_service/zone/zone.resolver";
     ZoneResolver,
     ZoneListService,
     MissionService,
+    MissionResolver,
     MissionListService
   ],
   bootstrap: [AppComponent]

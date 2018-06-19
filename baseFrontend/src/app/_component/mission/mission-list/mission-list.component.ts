@@ -20,6 +20,7 @@ export class MissionListComponent
               missionListService: MissionListService) {
     super(route, router);
     this.dataSource = missionListService;
+    this.pageSize = 5;
     this.pageIndexParamName = 'mission_page';
     this.pageSizeParamName = 'mission_size';
   }
@@ -27,7 +28,7 @@ export class MissionListComponent
   ngOnInit() {
     super.ngOnInit();
 
-    this.columns = ['id', 'zone', 'command', 'date', 'icon-edit'];
+    this.columns = ['id', 'name', 'zone', 'command', 'dateDeparture', 'description', 'icon-action', 'icon-edit'];
 
     this.pagination.page.subscribe(
       (event: PageEvent) => {

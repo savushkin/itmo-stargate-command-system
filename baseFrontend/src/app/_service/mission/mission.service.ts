@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {User} from "../../_model/user";
 import {Page} from "../../_model/page";
 import {Observable} from "rxjs/Observable";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Command} from "@sgc/_model/command";
 import {Mission} from "@sgc/_model/mission";
@@ -22,24 +22,29 @@ export class MissionService {
     );
   }
 
-  create(description: string, date: Date, zoneId: number, commandId: number) {
-    let data: FormData = new FormData();
-    data.append('description', description);
-    data.append('date', `${date.toISOString()}`);
-    data.append('zoneId', zoneId+'');
-    data.append('commandId', commandId+'');
+  getOne(id: number): Observable<Mission> {
+    const params: HttpParams = new HttpParams();
+    return this.http.get<Mission>(
+      `/${environment.context}/${environment.api.mission}/${id}`,
+      { params }
+    );
+  }
+
+  createOne(mission: any) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post(
       `/${environment.context}/${environment.api.mission}`,
-      data
-    ).subscribe(
-      (resp) => {
-        console.log(resp);
-      },
-      (err) => {
-        console.log(err);
-      },
-      () => {
-      }
+      JSON.stringify(mission),
+      { headers }
+    );
+  }
+
+  updateOne(id: number, mission: any) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put(
+      `/${environment.context}/${environment.api.mission}/${id}`,
+      JSON.stringify(mission),
+      { headers }
     );
   }
 }

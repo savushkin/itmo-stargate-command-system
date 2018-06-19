@@ -1,8 +1,8 @@
 <div class="page-container" [style.min-height.px]="minHeight">
   <mat-card>
-    <mat-card-title>Новая миссия</mat-card-title>
+    <mat-card-title>Редактирование миссии</mat-card-title>
     <mat-card-content>
-      <sgc-mission-form>
+      <sgc-mission-form [mission]="mission">
       </sgc-mission-form>
     </mat-card-content>
   </mat-card>

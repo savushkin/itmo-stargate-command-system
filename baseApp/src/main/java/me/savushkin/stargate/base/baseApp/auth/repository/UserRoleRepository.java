@@ -1,6 +1,8 @@
 package me.savushkin.stargate.base.baseApp.auth.repository;
 
 import me.savushkin.stargate.base.baseApp.auth.model.UserRole;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +13,7 @@ public interface UserRoleRepository extends PagingAndSortingRepository<UserRole,
     UserRole findByUserAndRole(Long user, String role);
 
     @Transactional
-//    @Query(value = "delete from UserRole where user = :user")
-    Long deleteAllByUser(Long user) ;
+    @Modifying
+    @Query(value = "delete from user_role where user_id = ?1", nativeQuery = true)
+    void deleteAllByUser(Long user) ;
 }

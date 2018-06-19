@@ -47,26 +47,27 @@ public class MissionController {
         }
     }
 
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity getMission(
+            @PathVariable("id") Long id){
+        try{
+            Mission mission = missionRepository.findOne(id);
+            return new ResponseEntity(mission, HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity create(
-            @RequestParam() String name,
-            @RequestParam() String description,
-            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateCreate,
-            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateDeparture,
-            @RequestParam() Boolean approved,
-            @RequestParam() Long zoneId,
-            @RequestParam() Long commandId) {
+            // @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+            @RequestBody() Mission missionData) {
         try {
-            Mission mission = new Mission();
-            mission.setName(name);
-            mission.setDescription(description);
-            mission.setDateCreate(dateCreate);
-            mission.setDateDeparture(dateDeparture);
-            mission.setZone(zoneRepository.findOne(zoneId));
-            mission.setCommand(commandRepository.findOne(commandId));
-            mission.setApproved(approved);
-            mission.setCancel(false);
-            return new ResponseEntity(missionRepository.save(mission), HttpStatus.CREATED);
+            missionData.setDateCreate(new Date());
+            missionData.setApproved(false);
+            missionData.setCancel(false);
+            return new ResponseEntity(missionRepository.save(missionData), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -74,32 +75,18 @@ public class MissionController {
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
     public ResponseEntity update(
-            @RequestParam() String name,
-            @RequestParam() String description,
-            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateCreate,
-            @RequestParam() @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") Date dateDeparture,
-            @RequestParam() Boolean approved,
-            @RequestParam() Long zoneId,
-            @RequestParam() Long commandId,
+            @RequestBody() Mission missionData,
             @PathVariable() Long id) {
         try {
             Mission mission = missionRepository.findOne(id);
-
-            mission.setName(name);
-            mission.setDescription(description);
-            mission.setDateCreate(dateCreate);
-            mission.setDateDeparture(dateDeparture);
-            mission.setZone(zoneRepository.findOne(zoneId));
-            mission.setCommand(commandRepository.findOne(commandId));
-            mission.setApproved(approved);
-
-            return new ResponseEntity(missionRepository.save(mission), HttpStatus.CREATED);
+            missionData.setId(mission.getId());
+            return new ResponseEntity(missionRepository.save(missionData), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}/cancel/{cancel}")
+    @RequestMapping(method = RequestMethod.POST, path = "/{id}/cancel/{cancel}")
     public ResponseEntity cancel(
             @PathVariable Long id,
             @PathVariable Boolean cancel

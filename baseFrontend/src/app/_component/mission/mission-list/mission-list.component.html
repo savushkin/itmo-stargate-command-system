@@ -5,22 +5,63 @@
       {{row.id}}
     </mat-cell>
   </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Название </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <b>{{row?.name}}</b>
+    </mat-cell>
+  </ng-container>
   <ng-container matColumnDef="zone">
     <mat-header-cell *matHeaderCellDef> Зона </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      {{row.zone.name}}
+      <b>{{row.zone.name}} ({{row?.zone?.addressStarGate?.physicalName}})</b>
+      <div>
+        <sgc-glyph [name]="row?.zone?.addressStarGate?.glyph1?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="row?.zone?.addressStarGate?.glyph2?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="row?.zone?.addressStarGate?.glyph3?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="row?.zone?.addressStarGate?.glyph4?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="row?.zone?.addressStarGate?.glyph5?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="row?.zone?.addressStarGate?.glyph6?.name">
+        </sgc-glyph>
+        <sgc-glyph [name]="row?.zone?.addressStarGate?.glyph7?.name">
+        </sgc-glyph>
+      </div>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="command">
     <mat-header-cell *matHeaderCellDef> Отряд </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      {{row.command.name}} - {{row.command?.commandType?.typeName}}
+      <b>{{row.command.name}}</b>
+      <ul class="unstyle-list">
+        <li *ngFor="let member of row?.command?.members">
+          {{member?.rank}} {{member?.name}} {{member?.surname}}
+        </li>
+      </ul>
     </mat-cell>
   </ng-container>
-  <ng-container matColumnDef="date">
+  <ng-container matColumnDef="dateDeparture">
     <mat-header-cell *matHeaderCellDef> Дата отправления </mat-header-cell>
     <mat-cell *matCellDef="let row">
-      {{row.date | date}}
+      {{row?.dateDeparture | date}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Описание </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row?.description}}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="icon-action">
+    <mat-header-cell *matHeaderCellDef>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-icon *ngIf="row?.approved">done</mat-icon>
+      <mat-icon *ngIf="row?.cancel">cancel</mat-icon>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="icon-edit">

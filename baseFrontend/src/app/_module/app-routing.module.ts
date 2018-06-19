@@ -17,6 +17,8 @@ import {CommandEditPageComponent} from "@sgc/_component/page/command-edit-page/c
 import {ZoneCreatePageComponent} from "@sgc/_component/page/zone-create-page/zone-create-page.component";
 import {ZoneEditPageComponent} from "@sgc/_component/page/zone-edit-page/zone-edit-page.component";
 import {ZoneResolver} from "@sgc/_service/zone/zone.resolver";
+import {MissionEditPageComponent} from "@sgc/_component/page/mission-edit-page/mission-edit-page.component";
+import {MissionResolver} from "@sgc/_service/mission/mission.resolver";
 
 const routes: Routes = [
   {
@@ -105,6 +107,13 @@ const routes: Routes = [
       {
         path: 'create',
         component: MissionCreatePageComponent
+      },
+      {
+        path: ':id',
+        resolve: {
+          mission: MissionResolver
+        },
+        component: MissionEditPageComponent
       }
     ]
   }

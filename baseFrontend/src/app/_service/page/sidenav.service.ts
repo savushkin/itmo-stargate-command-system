@@ -46,11 +46,12 @@ export class SidenavService {
               name: 'Список миссий',
               url: '/mission'
             });
-            navs.push({
-              name: 'Создать миссию',
-              url: '/mission/create'
-            });
             break;
+          case 'ROLE_OPERATOR':
+            navs.push({
+              name: 'Врата',
+              url: '/star-gate'
+            });
           case 'ROLE_USER':
             break;
         }

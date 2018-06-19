@@ -73,6 +73,13 @@ export class UserFormComponent implements OnInit {
 
 
   save(form) {
+    let userRoles = [];
+    this.item.userRole.forEach(role => {
+      if ( !userRoles.includes(role) ) {
+        userRoles.push(role)
+      }
+    });
+    this.item.userRole = userRoles;
     if (form.valid) {
       this.item.userRole = this.item.userRole.map( item => {return {role: item}});
       if (this.item.id) {
