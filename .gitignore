@@ -2,3 +2,5 @@
 target
 *.iml
 uploads
+
+node_modules
