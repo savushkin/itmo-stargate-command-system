@@ -19,6 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "sgc",
       "styles": [
+        "../node_modules/material-design-icons/iconfont/material-icons.css",
         "styles.scss"
       ],
       "scripts": [

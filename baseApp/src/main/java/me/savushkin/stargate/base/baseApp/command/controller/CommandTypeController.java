@@ -5,6 +5,7 @@ import me.savushkin.stargate.base.baseApp.command.repository.CommandTypeReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class CommandTypeController {
             @RequestParam(name = "page", defaultValue = "0") Integer pageNum,
             @RequestParam(name = "size", defaultValue = "15") Integer size) {
         try {
-            Page<CommandType> page = commandTypeRepository.findAll(new PageRequest(pageNum, size));
+            Page<CommandType> page = commandTypeRepository.findAll(new PageRequest(pageNum, size, new Sort(Sort.Direction.ASC, "id")));
             return new ResponseEntity(page, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

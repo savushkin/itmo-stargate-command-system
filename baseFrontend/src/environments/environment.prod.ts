@@ -8,10 +8,13 @@ export const environment = {
   },
   api: {
     find: 'find',
+    state: 'state',
 
     user: 'user',
     command: 'command',
     zone: 'zone',
-    mission: 'mission'
+    addressStarGate: 'address-star-gate',
+    mission: 'mission',
+    stargate: 'star-gate'
   }
 };

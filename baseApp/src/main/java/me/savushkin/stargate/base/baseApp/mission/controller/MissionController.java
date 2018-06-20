@@ -1,6 +1,5 @@
 package me.savushkin.stargate.base.baseApp.mission.controller;
 
-import me.savushkin.stargate.base.baseApp.auth.model.User;
 import me.savushkin.stargate.base.baseApp.command.repository.CommandRepository;
 import me.savushkin.stargate.base.baseApp.mission.model.Mission;
 import me.savushkin.stargate.base.baseApp.mission.repository.MissionRepository;
@@ -8,12 +7,9 @@ import me.savushkin.stargate.base.baseApp.planet.repository.ZoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +36,7 @@ public class MissionController {
             @RequestParam(name = "page", defaultValue = "0") Integer pageNum,
             @RequestParam(name = "size", defaultValue = "15") Integer size) {
         try {
-            Page<Mission> page = missionRepository.findAll(new PageRequest(pageNum, size));
+            Page<Mission> page = missionRepository.findAll(new PageRequest(pageNum, size, new Sort(Sort.Direction.DESC, "dateDeparture")));
             return new ResponseEntity(page, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
